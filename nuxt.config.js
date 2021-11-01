@@ -65,8 +65,10 @@ export default {
     }
   },
 
+  target: 'static',
+
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: { baseURL: 'http://localhost:8080' },
+  axios: { baseURL: 'http://www.perlinson.xyz:8080' },
 
   // proxy: {
   //   '/api/': { target: 'http://localhost:3000' }
