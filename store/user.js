@@ -18,6 +18,8 @@ export const getters = {
 export const actions = {
   async login({ commit }, loginData) {
     try {
+      console.log(loginData)
+
       await this.$auth.loginWith('local', {
         data: loginData
       })

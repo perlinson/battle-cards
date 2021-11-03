@@ -1,3 +1,4 @@
+/* eslint-disable nuxt/no-cjs-in-config */
 const routerBase =
   process.env.DEPLOY_ENV === 'GH_PAGES'
     ? {
@@ -7,10 +8,18 @@ const routerBase =
       }
     : {}
 
-export default {
+module.exports = {
   ...routerBase,
-
   // Global page headers: https://go.nuxtjs.dev/config-head
+
+  dev: process.env.NODE_ENV !== 'production',
+
+  env: {
+    MONGO_ALTA_USER: process.env.MONGO_ALTA_USER,
+    MONGO_ALTA_PWD: process.env.MONGO_ALTA_PWD,
+    SECRET_KEY: process.env.SECRET_KEY
+  },
+
   head: {
     title: 'front',
     meta: [
@@ -20,6 +29,12 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+  },
+
+  server: {
+    port: 3000, // default: 3000
+    host: '127.0.0.1', // default: localhost,
+    timing: false
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -50,9 +65,29 @@ export default {
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
 
-    '@nuxtjs/auth-next'
+    '@nuxtjs/auth-next',
+    'nuxt-socket-io'
   ],
 
+  telemetry: false,
+
+  io: {
+    sockets: [
+      // Required
+      {
+        // At least one entry is required
+        name: 'home',
+        url: 'http://localhost:3000',
+        default: true,
+        vuex: {
+          /* see section below */
+        },
+        namespaces: {
+          /* see section below */
+        }
+      }
+    ]
+  },
   auth: {
     strategies: {
       local: {
@@ -76,14 +111,17 @@ export default {
     }
   },
 
-  target: 'static',
+  target: process.env.NODE_ENV === 'production' ? 'static' : 'server',
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: { baseURL: 'http://www.perlinson.xyz:8080' },
+  // axios: { baseURL: 'http://www.perlinson.xyz:8080' },
+  axios: {
+    proxy: true
+  },
 
-  // proxy: {
-  //   '/api/': { target: 'http://localhost:3000' }
-  // },
+  proxy: {
+    '/api/': { target: 'http://localhost:3000' }
+  },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
