@@ -31,8 +31,8 @@ export const actions = {
   },
   async register({ commit }, registerData) {
     try {
-      await this.$axios.$post('/api/auth/signin', {
-        fullname: registerData.fullname,
+      await this.$axios.$post('/api/users/', {
+        name: registerData.name,
         email: registerData.email,
         password: registerData.password
       })

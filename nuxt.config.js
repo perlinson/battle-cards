@@ -8,7 +8,7 @@ const routerBase =
       }
     : {}
 
-module.exports = {
+export default {
   ...routerBase,
   // Global page headers: https://go.nuxtjs.dev/config-head
 
@@ -102,10 +102,10 @@ module.exports = {
           autoFetch: true
         },
         endpoints: {
-          login: { url: '/api/auth/login', method: 'post' },
+          login: { url: '/api/auth', method: 'post' },
           //        refresh: { url: "/api/auth/refresh-token", method: "post" },
           logout: false, //  we don't have an endpoint for our logout in our API and we just remove the token from localstorage
-          user: { url: '/api/auth/user', method: 'get' }
+          user: { url: '/api/user', method: 'get' }
         }
       }
     }

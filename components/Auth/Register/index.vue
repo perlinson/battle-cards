@@ -2,10 +2,10 @@
   <div>
     <form @submit.prevent="register(registerData)">
       <div class="mb-3">
-        <label for="fullname" class="form-label">Full Name</label>
+        <label for="name" class="form-label">Full Name</label>
         <input
-          id="fullname"
-          v-model="registerData.fullname"
+          id="name"
+          v-model="registerData.name"
           type="text"
           class="form-control"
         />
@@ -39,7 +39,7 @@ export default {
   data() {
     return {
       registerData: {
-        fullname: '',
+        name: '',
         email: '',
         password: '',
       },
