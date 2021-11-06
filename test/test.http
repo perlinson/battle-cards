@@ -11,4 +11,4 @@ content-type: application/json
 
 
 ###
-curl -X POST http://0.0.0.0:9000/users -i -d "email=perlinson_2008@163.com&password=123456&access_token=FH7s2TrD9iFmFjVfjJECjNfbQEZu5VnB"
+curl -X POST http://0.0.0.0:3000/users -i -d "email=perlinson_2008@163.com&password=123456&access_token=FH7s2TrD9iFmFjVfjJECjNfbQEZu5VnB"
