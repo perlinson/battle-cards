@@ -88,6 +88,7 @@
     "@nuxtjs/eslint-module": "^3.0.2",
     "cross-env": "^7.0.2",
     "dotenv-safe": "^8.2.0",
+    "@nuxtjs/vuetify": "^1.12.1",
     "eslint": "^7.29.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-config-standard": "^14.1.0",
