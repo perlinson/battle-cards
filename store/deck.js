@@ -1,9 +1,11 @@
 export const state = () => ({
   decks: [],
-  currDeckIndex: {
+  select: {
     type: Number,
-    default: 0
-  }
+    default: 0,
+  },
+
+  selectedDeck: null,
 })
 
 export const mutations = {
@@ -15,14 +17,19 @@ export const mutations = {
   },
   showLoading(state) {
     state.isLoading = true
-  }
+  },
 }
 
 export const getters = {
   decks: (state) => state.decks,
   currDeck: (state) => {
     if (state.decks.length > 0) return state.decks[state.currDeckIndex]
-  }
+  },
+  selectedDeck(state) {
+    return state.decks.find(function (project) {
+      return project.id === state.selectedProjectId
+    })
+  },
 }
 
 export const actions = {
@@ -47,10 +54,10 @@ export const actions = {
             deck.data.players[0],
             {
               player2: {
-                player_name: localStorage.user_name
-              }
-            }
-          ]
+                player_name: localStorage.user_name,
+              },
+            },
+          ],
         })
         .then((result) => {
           this.$router.push({ path: '/startgame/' + deck._id })
@@ -63,7 +70,7 @@ export const actions = {
     await this.$axios
       .$post('/api/deck/create', {
         email: rootState.auth.user.email,
-        deckName
+        deckName,
       })
       .then((response) => {
         dispatch('getDeckList')
@@ -81,7 +88,7 @@ export const actions = {
     const deckName = formdata.get('nameDeck')
     await this.$axios
       .$post('/api/deck/createDeck', {
-        deck_name: deckName
+        deck_name: deckName,
       })
       .then((response) => {
         dispatch('getDeckList')
@@ -92,5 +99,5 @@ export const actions = {
         commit('hideLoading')
         this.$router.push('/error')
       })
-  }
+  },
 }

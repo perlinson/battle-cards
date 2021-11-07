@@ -55,7 +55,7 @@ export default {
   ],
 
   router: {
-    middleware: ['auth']
+    // middleware: ['auth']
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -122,7 +122,7 @@ export default {
   },
 
   proxy: {
-    '/api/': { target: 'http://localhost:3000' }
+    '/api/': { target: 'http://www.perlinson.xyz:3000' }
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa

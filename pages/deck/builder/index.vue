@@ -185,7 +185,7 @@
 
 <script>
 import CardHelper from "@/helpers/cardHelper";
-
+import {mapState, mapActions, mapGetters,mapMutations} from "vuex";
 export default {
   data() {
     return {
@@ -213,6 +213,10 @@ export default {
     if (localStorage.getItem("decks") !== null ) {
       this.decks = JSON.parse(localStorage.getItem("decks"));
     }
+  },
+
+  computed:{
+    ...mapGetters()
   },
 
   methods: {
