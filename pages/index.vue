@@ -1,25 +1,22 @@
 <template>
-  <div>
-    <el-row>
-      <el-button type="btn-primary" @click="getMessage">GetMessage</el-button>
-    </el-row>
-    <Room />
-  </div>
+  <div></div>
 </template>
 
 <script>
 export default {
+  asyncData({ store, route }) {},
   data() {
     return {
-      socket: null,
+      callCards: [],
     }
   },
-  mounted() {
-    this.socket = this.$nuxtSocket({ name: 'home' })
-  },
   methods: {
-    getMessage() {
-      this.socket.emit('getMessage')
+    async updateDatabase() {
+      await fetch('https://db.ygoprodeck.com/api/v7/cardinfo.php')
+        .then((res) => res.json())
+        .then((cardData) => {
+          this.$store.dispatch('card/updateCards', cardData.data)
+        })
     },
   },
 }

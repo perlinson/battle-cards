@@ -70,7 +70,7 @@
 export default {
   computed: {
     isAuthenticated() {
-      return this.$store.getters.isAuthenticated // it check if user isAuthenticated
+      return this.state.auth.loggedIn // it check if user isAuthenticated
     },
   },
   methods: {

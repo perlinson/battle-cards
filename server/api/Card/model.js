@@ -1,49 +1,54 @@
 import mongoose, { Schema } from 'mongoose'
 
-const cardSchema = new Schema({
-  name: {
-    type: String
+const cardSchema = new Schema(
+  {
+    name: {
+      type: String,
+    },
+    type: {
+      type: String,
+    },
+    desc: {
+      type: String,
+    },
+    atk: {
+      type: String,
+    },
+    def: {
+      type: String,
+    },
+    level: {
+      type: String,
+    },
+    race: {
+      type: String,
+    },
+    attribute: {
+      type: String,
+    },
+    card_images: {
+      type: Object,
+    },
+    card_prices: {
+      type: String,
+    },
+    game: {
+      type: String,
+    },
   },
-  type: {
-    type: String
-  },
-  desc: {
-    type: String
-  },
-  atk: {
-    type: String
-  },
-  def: {
-    type: String
-  },
-  level: {
-    type: String
-  },
-  race: {
-    type: String
-  },
-  attribute: {
-    type: String
-  },
-  card_images: {
-    type: String
-  },
-  card_prices: {
-    type: String
-  },
-  game: {
-    type: String
+  {
+    timestamps: true,
+    toJSON: {
+      virtuals: true,
+      transform: (obj, ret) => {
+        delete ret._id
+      },
+    },
   }
-}, {
-  timestamps: true,
-  toJSON: {
-    virtuals: true,
-    transform: (obj, ret) => { delete ret._id }
-  }
-})
+)
 
 cardSchema.methods = {
-  view (full) {
+  view(full) {
     const view = {
       // simple view
       id: this.id,
@@ -59,14 +64,16 @@ cardSchema.methods = {
       card_prices: this.card_prices,
       game: this.game,
       createdAt: this.createdAt,
-      updatedAt: this.updatedAt
+      updatedAt: this.updatedAt,
     }
 
-    return full ? {
-      ...view
-      // add properties for a full view
-    } : view
-  }
+    return full
+      ? {
+          ...view,
+          // add properties for a full view
+        }
+      : view
+  },
 }
 
 const model = mongoose.model('Card', cardSchema)

@@ -3,8 +3,8 @@ const routerBase =
   process.env.DEPLOY_ENV === 'GH_PAGES'
     ? {
         router: {
-          base: '/cardGameClient/'
-        }
+          base: '/cardGameClient/',
+        },
       }
     : {}
 
@@ -17,7 +17,7 @@ export default {
   env: {
     MONGO_ALTA_USER: process.env.MONGO_ALTA_USER,
     MONGO_ALTA_PWD: process.env.MONGO_ALTA_PWD,
-    SECRET_KEY: process.env.SECRET_KEY
+    SECRET_KEY: process.env.SECRET_KEY,
   },
 
   head: {
@@ -26,15 +26,15 @@ export default {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' }
+      { name: 'format-detection', content: 'telephone=no' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
   server: {
     port: 3000, // default: 3000
     host: '127.0.0.1', // default: localhost,
-    timing: false
+    timing: false,
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -68,7 +68,7 @@ export default {
     '@nuxtjs/pwa',
 
     '@nuxtjs/auth-next',
-    'nuxt-socket-io'
+    'nuxt-socket-io',
   ],
 
   telemetry: false,
@@ -86,9 +86,9 @@ export default {
         },
         namespaces: {
           /* see section below */
-        }
-      }
-    ]
+        },
+      },
+    ],
   },
   auth: {
     strategies: {
@@ -97,20 +97,20 @@ export default {
           property: 'token',
           global: true,
           required: true,
-          type: 'Bearer'
+          type: 'Bearer',
         },
         user: {
           property: 'user',
-          autoFetch: true
+          autoFetch: true,
         },
         endpoints: {
           login: { url: '/api/auth', method: 'post' },
           //        refresh: { url: "/api/auth/refresh-token", method: "post" },
           logout: false, //  we don't have an endpoint for our logout in our API and we just remove the token from localstorage
-          user: { url: '/api/user', method: 'get' }
-        }
-      }
-    }
+          user: { url: '/api/user', method: 'get' },
+        },
+      },
+    },
   },
 
   target: process.env.NODE_ENV === 'production' ? 'static' : 'server',
@@ -118,20 +118,25 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   // axios: { baseURL: 'http://www.perlinson.xyz:8080' },
   axios: {
-    proxy: true
+    proxy: true,
   },
 
   proxy: {
-    '/api/': { target: 'http://www.perlinson.xyz:3000' }
+    '/api/': {
+      target:
+        process.env.NODE_ENV === 'production'
+          ? 'http://www.perlinson.xyz:3000'
+          : 'http://localhost:3000',
+    },
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
-      lang: 'en'
-    }
+      lang: 'en',
+    },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {}
+  build: {},
 }
