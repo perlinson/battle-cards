@@ -2,7 +2,9 @@ module.exports = {
   root: true,
   env: {
     browser: true,
-    node: true
+    node: true,
+    es6: true,
+    jQuery: true
   },
   parserOptions: {
     parser: '@babel/eslint-parser',

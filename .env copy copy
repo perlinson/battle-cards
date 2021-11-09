@@ -1,0 +1,4 @@
+NODE_ENV=development
+MONGO_ALTA_USER=GameDbUser
+MONGO_ALTA_PWD=XJ27MQhqIUXkWtWX
+SECRET_KEY=expressnuxtsecret
