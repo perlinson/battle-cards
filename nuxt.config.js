@@ -14,6 +14,30 @@ export default {
 
   dev: process.env.NODE_ENV !== 'production',
 
+  telemetry: false,
+  publicRuntimeConfig: {
+    /** @type {import('io/types').NuxtSocketIoRuntimeOptions} */
+    io: {
+      sockets: [
+        {
+          name: 'publicSocket',
+          url: 'url1',
+        },
+      ],
+    },
+  },
+  privateRuntimeConfig: {
+    /** @type {import('io/types').NuxtSocketIoRuntimeOptions} */
+    io: {
+      sockets: [
+        {
+          name: 'privateSocket',
+          url: 'url2',
+        },
+      ],
+    },
+  },
+
   env: {
     MONGO_ALTA_USER: process.env.MONGO_ALTA_USER,
     MONGO_ALTA_PWD: process.env.MONGO_ALTA_PWD,
@@ -68,24 +92,79 @@ export default {
     '@nuxtjs/pwa',
 
     '@nuxtjs/auth-next',
+
     'nuxt-socket-io',
   ],
 
-  telemetry: false,
-
+  /** @type {import('io/types').NuxtSocketIoOptions} */
   io: {
+    // server: {
+    //   cors: {
+    //     origin: 'https://example.com',
+    //     methods: ['GET', 'POST']
+    //   }
+    // },
     sockets: [
-      // Required
       {
-        // At least one entry is required
         name: 'home',
-        url: 'http://localhost:3000',
-        default: true,
+        url:
+          process.env.NODE_ENV === 'production'
+            ? 'https://nuxt-socket-io.herokuapp.com'
+            : 'http://localhost:3000',
         vuex: {
-          /* see section below */
+          mutations: [{ progress: 'examples/SET_PROGRESS' }],
+          actions: [{ chatMessage: 'FORMAT_MESSAGE' }],
+          emitBacks: ['titleFromUser'],
         },
         namespaces: {
-          /* see section below */
+          '/index': {
+            emitters: ['getMessage2 + testMsg --> message2Rxd'],
+            listeners: ['chatMessage2', 'chatMessage3 --> message3Rxd'],
+          },
+        },
+      },
+      {
+        name: 'chatSvc',
+        url:
+          process.env.NODE_ENV === 'production'
+            ? 'https://nuxt-socket-io.herokuapp.com'
+            : 'http://localhost:3000',
+        // vuex: {
+        //   mutations: [{ progress: 'examples/SET_PROGRESS' }],
+        //   actions: [{ chatMessage: 'FORMAT_MESSAGE' }],
+        //   emitBacks: [
+        //     'examples/someObj',
+        //     'examples/sample',
+        //     { 'examples/sample2': 'sample2' },
+        //     'titleFromUser'
+        //   ]
+        // },
+        // namespaces: {
+        //   '/index': {
+        //     emitters: ['getMessage2 + testMsg --> message2Rxd'],
+        //     listeners: ['chatMessage2', 'chatMessage3 --> message3Rxd']
+        //   },
+        //   '/examples': {
+        //     emitBacks: ['sample3', 'sample4 <-- myObj.sample4'],
+        //     emitters: [
+        //       'reset] getProgress + refreshInfo --> progress [handleDone'
+        //     ],
+        //     listeners: ['progress']
+        //   }
+        // }
+      },
+      { name: 'goodSocket', url: 'http://localhost:3000' },
+      { name: 'badSocket', url: 'http://localhost:3001' },
+      { name: 'work', url: 'http://somedomain1:3000' },
+      { name: 'car', url: 'http://somedomain2:3000' },
+      { name: 'tv', url: 'http://somedomain3:3000' },
+      {
+        name: 'test',
+        url: 'http://localhost:4000',
+        vuex: {
+          mutations: [{ progress: 'examples/SET_PROGRESS' }],
+          actions: [{ chatMessage: 'FORMAT_MESSAGE' }],
+          emitBacks: ['examples/sample', { 'examples/sample2': 'sample2' }],
         },
       },
     ],

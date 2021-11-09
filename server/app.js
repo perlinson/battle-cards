@@ -16,30 +16,26 @@ if (mongo.uri) {
 mongoose.Promise = Promise
 
 async function start() {
+  if (!config.dev) {
+    config.server = {
+      host: '0.0.0.0',
+      port: process.env.PORT || 8000,
+    }
+  }
   const nuxt = new Nuxt(config)
-  // await nuxt.listen()
+  await nuxt.listen()
+  consola.log('nuxt server listening', nuxt.server.options.server)
 
-  const { host, port } = nuxt.options.server
+  // Give nuxt middleware to express
+  app.use(nuxt.render)
 
-  // Build only in dev mode
   if (config.dev) {
     const builder = new Builder(nuxt)
     await builder.build()
   } else {
     await nuxt.ready()
   }
-
-  app.use(nuxt.render)
-
-  setImmediate(() => {
-    server.listen(port, host, () => {
-      consola.ready(
-        'Express server listening on http://%s:%d, in %s mode',
-        ip,
-        port
-      )
-    })
-  })
+  consola.log('Nuxt app ready!')
 }
 start()
 
