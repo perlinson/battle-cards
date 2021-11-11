@@ -22,7 +22,7 @@
                             class="ma-2"
                             v-bind="attrs"
                             v-on="on"
-                          > 
+                          >
                             Export
                           </v-btn>
                         </template>
@@ -184,14 +184,21 @@
 </template>
 
 <script>
-import CardHelper from "@/helpers/cardHelper";
-import {mapState, mapActions, mapGetters,mapMutations} from "vuex";
+import draggable from 'vuedraggable'
+import CardHelper from '@/helpers/cardHelper'
+
 export default {
+  name: 'App',
+  layout: 'deck',
+  components: {
+    draggable,
+  },
+
   data() {
     return {
       dialog: false,
       selectedDeck: null,
-      newDeck: "",
+      newDeck: '',
       featuredCard: null,
       decks: {},
       deck: {
@@ -199,101 +206,97 @@ export default {
         extra: [],
         side: [],
       },
-      items: [{ title: "My decks", icon: "mdi-view-dashboard" }],
+      items: [{ title: 'My decks', icon: 'mdi-view-dashboard' }],
       maxCards: {
         main: 60,
         extra: 15,
         side: 15,
         copies: 3,
       },
-    };
-  },
-
-  mounted() {
-    if (localStorage.getItem("decks") !== null ) {
-      this.decks = JSON.parse(localStorage.getItem("decks"));
     }
   },
 
-  computed:{
-    ...mapGetters()
+  mounted() {
+    if (localStorage.getItem('decks') !== null) {
+      this.decks = JSON.parse(localStorage.getItem('decks'))
+    }
   },
 
   methods: {
     addCardToDeck(card, toSideDeck = false) {
-      const type = toSideDeck ? "side" : CardHelper.checkCardType(card);
+      const type = toSideDeck ? 'side' : CardHelper.checkCardType(card)
 
       /** Check if deck does not exceed card limit */
-      if (this.deck[type].length >= this.maxCards[type]) return;
+      if (this.deck[type].length >= this.maxCards[type]) return
 
       /** Check if card does not exceed max copies */
       const cardCount = this.deck[type].filter(
         (cardInDeck) => cardInDeck.name === card.name
-      ).length;
-      const cardMaxCopies = CardHelper.checkBanlist(card);
-      if (cardCount >= cardMaxCopies) return;
+      ).length
+      const cardMaxCopies = CardHelper.checkBanlist(card)
+      if (cardCount >= cardMaxCopies) return
 
-      this.deck[type] = [...this.deck[type], card];
-      this.save();
+      this.deck[type] = [...this.deck[type], card]
+      this.save()
     },
 
     removeCardFromDeck(card) {
-      this.deck.main.splice(this.deck.main.indexOf(card), 1);
-      this.save();
+      this.deck.main.splice(this.deck.main.indexOf(card), 1)
+      this.save()
     },
 
     save() {
-      localStorage.setItem("decks", JSON.stringify(this.decks));
+      localStorage.setItem('decks', JSON.stringify(this.decks))
     },
 
     addNewDeck(e) {
-      e.preventDefault();
+      e.preventDefault()
       this.decks[this.newDeck] = {
         main: [],
         extra: [],
         side: [],
-      };
-      this.save();
-      this.selectedDeck = this.newDeck;
-      this.deck = this.decks[this.newDeck];
-      console.log(this.decks);
-      this.newDeck = "";
-      if (this.dialog) this.dialog = false;
+      }
+      this.save()
+      this.selectedDeck = this.newDeck
+      this.deck = this.decks[this.newDeck]
+      console.log(this.decks)
+      this.newDeck = ''
+      if (this.dialog) this.dialog = false
     },
 
     selectDeck(selectedDeck) {
-      this.deck = this.decks[selectedDeck];
-      this.selectedDeck = selectedDeck;
+      this.deck = this.decks[selectedDeck]
+      this.selectedDeck = selectedDeck
     },
 
     showCard(card) {
-      this.featuredCard = card;
+      this.featuredCard = card
     },
 
     sortDeck() {
-      ["main", "extra", "side"].forEach((deckType) => {
+      ;['main', 'extra', 'side'].forEach((deckType) => {
         this.deck[deckType] = this.deck[deckType]
           .sort((a, b) => {
-            return a.id - b.id;
+            return a.id - b.id
           })
           .sort((a, b) => {
-            if (a.type === "Tuner Monster") a.type = "Effect Monster";
-            if (a.type > b.type) return 1;
-            if (a.type < b.type) return -1;
-            return 0;
+            if (a.type === 'Tuner Monster') a.type = 'Effect Monster'
+            if (a.type > b.type) return 1
+            if (a.type < b.type) return -1
+            return 0
           })
           .sort((a, b) => {
-            return b.level - a.level;
-          });
-      });
-      this.save();
+            return b.level - a.level
+          })
+      })
+      this.save()
     },
 
     exportDeck(deckType) {
-      console.log(this.deck);
+      console.log(deckType)
     },
   },
-};
+}
 </script>
 
 <style>

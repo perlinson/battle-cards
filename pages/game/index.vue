@@ -1,5 +1,5 @@
 <template>
-  <GameBoard />
+  <CardList />
 </template>
 
 <script>

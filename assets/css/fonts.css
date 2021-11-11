@@ -1,0 +1,49 @@
+@font-face {
+  font-family: 'Josefin Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/l/font?kit=Qw3PZQNVED7rKGKxtqIqX5E-AVSJrOCfjY46_DjQXMRzIiylPTm4f-DA&skey=22ddf758bcf1d5cd&v=v20) format('woff2');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/l/font?kit=S6u8w4BMUTPHh30wXj2nPG-MiLFanIM&skey=cfa1ba7b04a1ba34&v=v20) format('woff2');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/l/font?kit=S6u9w4BMUTPHh7USewqdFAegibhZgYYv&skey=91f32e07d083dd3a&v=v20) format('woff2');
+}
+@font-face {
+  font-family: 'Raleway';
+  font-style: italic;
+  font-weight: 100;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/l/font?kit=1Pt_g8zYS_SKggPNyCgSQamb1W0lwk4S4WjNPrENLRcVpavJDlMw&skey=bf44ee29381a37b0&v=v22) format('woff2');
+}
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/l/font?kit=1Ptug8zYS_SKggPN-C8aQoEnYZXyqill&skey=30a27f2564731c64&v=v22) format('woff2');
+}
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/l/font?kit=1Ptug8zYS_SKggPN-C8aQoEnYZXyqill&skey=30a27f2564731c64&v=v22) format('woff2');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/l/font?kit=KFOkCnqEu92Fr1MmgWxKMT8dYqWX-ec8DA&skey=5473b731ec7fc9c1&v=v29) format('woff2');
+}

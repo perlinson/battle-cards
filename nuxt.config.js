@@ -56,7 +56,7 @@ export default {
   },
 
   server: {
-    port: 3000, // default: 3000
+    port: 8000, // default: 3000
     host: '127.0.0.1', // default: localhost,
     timing: false,
   },
@@ -76,7 +76,25 @@ export default {
     '@nuxtjs/eslint-module',
     // 简单使用
     '@nuxtjs/vuetify',
+
+    '@nuxtjs/google-fonts',
   ],
+
+  googleFonts: {
+    text: 'Hello world',
+    families: {
+      Roboto: true,
+      'Josefin+Sans': true,
+      Lato: [100, 300],
+      Raleway: {
+        wght: [100, 400],
+        ital: [100],
+      },
+    },
+    download: true,
+    base64: false,
+    fontsPath: '~assets/fonts',
+  },
 
   router: {
     // middleware: ['auth']

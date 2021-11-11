@@ -1,6 +1,7 @@
 export const state = () => ({
   chatMessages: '',
   titleFromUser: '',
+  sidebar: false,
 })
 
 export const getters = {
@@ -15,6 +16,10 @@ export const getters = {
 export const mutations = {
   SET_MESSAGE(state, chatMessage) {
     state.chatMessages += chatMessage
+  },
+
+  toggleSidebar(state) {
+    state.sidebar = !state.sidebar
   },
 }
 
