@@ -1,105 +1,149 @@
 <template>
-    <v-app-bar id="core-app-bar" absolute app color="transparent" flat height="88">
-        <v-toolbar-title class="tertiary--text font-weight-light align-self-center">
-            <v-btn v-if="responsive" dark icon @click.stop="onClick">
-                <v-icon>mdi-view-list</v-icon>
-            </v-btn>
-            {{ title }}
-        </v-toolbar-title>
+  <v-app-bar
+    id="core-app-bar"
+    absolute
+    app
+    color="transparent"
+    flat
+    dense
+    height="88"
+    src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
+  >
+    <v-toolbar-title class="tertiary--text font-weight-light align-self-center">
+      <v-btn v-if="responsive" dark icon @click.stop="onClick">
+        <v-icon>mdi-view-list</v-icon>
+      </v-btn>
+      {{ title }}
+    </v-toolbar-title>
 
-        <v-spacer />
+    <v-spacer />
 
-        <v-toolbar-items>
-            <v-row align="center" class="mx-0">
-                <v-text-field class="mr-4 purple-input" color="purple" label="Search..." hide-details />
-
-                <v-btn icon to="/">
-                    <v-icon color="tertiary">mdi-view-dashboard</v-icon>
-                </v-btn>
-
-                <v-menu bottom left offset-y transition="slide-y-transition">
-                    <template v-slot:activator="{ attrs, on }">
-                        <v-btn class="toolbar-items" icon to="/notifications" v-bind="attrs" v-on="on">
-                            <v-badge color="error" overlap>
-                                <template slot="badge">
-                                    {{ notifications.length }}
-                                </template>
-                                <v-icon color="tertiary">mdi-bell</v-icon>
-                            </v-badge>
-                        </v-btn>
-                    </template>
-
-                    <v-card>
-                        <v-list dense>
-                            <v-list-item v-for="notification in notifications" :key="notification" @click="onClick">
-                                <v-list-item-title v-text="notification" />
-                            </v-list-item>
-                        </v-list>
-                    </v-card>
-                </v-menu>
-
-                <v-btn to="/user-profile" icon>
-                    <v-icon color="tertiary">mdi-account</v-icon>
-                </v-btn>
-            </v-row>
-        </v-toolbar-items>
-    </v-app-bar>
+    <v-toolbar-items>
+      <v-row align="center" class="mx-0">
+        <v-col cols="6">
+          <v-text-field
+            class="mr-4 purple-input"
+            color="purple"
+            label="Search..."
+            hide-details
+          />
+        </v-col>
+        <v-col cols="6">
+          <v-btn icon to="/">
+            <v-icon color="tertiary">mdi-view-dashboard</v-icon>
+          </v-btn>
+          <v-menu bottom left offset-y transition="slide-y-transition">
+            <template #activator="{ attrs, on }">
+              <v-btn
+                class="toolbar-items"
+                icon
+                to="/notifications"
+                v-bind="attrs"
+                v-on="on"
+              >
+                <v-badge color="error" overlap>
+                  <template slot="badge">
+                    {{ notifications.length }}
+                  </template>
+                  <v-icon color="tertiary">mdi-bell</v-icon>
+                </v-badge>
+              </v-btn>
+            </template>
+            <v-card>
+              <v-list dense>
+                <v-list-item
+                  v-for="notification in notifications"
+                  :key="notification"
+                  @click="onClick"
+                >
+                  <v-list-item-title v-text="notification" />
+                </v-list-item>
+              </v-list>
+            </v-card>
+          </v-menu>
+          <v-btn to="/user-profile" icon>
+            <v-icon color="tertiary">mdi-account</v-icon>
+          </v-btn>
+          <v-btn icon>
+            <v-icon>mdi-export</v-icon>
+          </v-btn>
+        </v-col>
+      </v-row>
+    </v-toolbar-items>
+  </v-app-bar>
 </template>
 
 <script>
 // Utilities
-import { mapMutations } from 'vuex';
+import { mapMutations } from 'vuex'
 
 export default {
-    data: () => ({
-        notifications: [
-            'Mike, John responded to your email',
-            'You have 5 new tasks',
-            "You're now a friend with Andrew",
-            'Another Notification',
-            'Another One',
-        ],
-        title: null,
-        responsive: false,
-    }),
+  data: () => ({
+    notifications: [
+      'Mike, John responded to your email',
+      'You have 5 new tasks',
+      "You're now a friend with Andrew",
+      'Another Notification',
+      'Another One',
+    ],
+    title: null,
+    responsive: false,
+  }),
+  computed: {
+    breadcrumbs() {
+      const { matched } = this.$route
+      return matched.map((route, index) => {
+        const to =
+          index === matched.length - 1
+            ? this.$route.path
+            : route.path || route.redirect
+        const text = this.$t(route.meta.title)
+        return {
+          text,
+          to,
+          exact: true,
+          disabled: false,
+        }
+      })
+    },
+  },
+  watch: {
+    $route(val) {
+      this.title = val.name
+    },
+  },
 
-    watch: {
-        $route(val) {
-            this.title = val.name;
-        },
-    },
+  mounted() {
+    this.onResponsiveInverted()
+    window.addEventListener('resize', this.onResponsiveInverted)
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.onResponsiveInverted)
+  },
 
-    mounted() {
-        this.onResponsiveInverted();
-        window.addEventListener('resize', this.onResponsiveInverted);
+  methods: {
+    ...mapMutations('app', ['setDrawer', 'toggleDrawer']),
+    onClick() {
+      this.setDrawer(!this.$store.state.app.drawer)
     },
-    beforeDestroy() {
-        window.removeEventListener('resize', this.onResponsiveInverted);
+    onResponsiveInverted() {
+      if (window.innerWidth < 991) {
+        this.responsive = true
+      } else {
+        this.responsive = false
+      }
     },
-
-    methods: {
-        ...mapMutations('app', ['setDrawer', 'toggleDrawer']),
-        onClick() {
-            this.setDrawer(!this.$store.state.app.drawer);
-        },
-        onResponsiveInverted() {
-            if (window.innerWidth < 991) {
-                this.responsive = true;
-            } else {
-                this.responsive = false;
-            }
-        },
-    },
-};
+  },
+}
 </script>
 
 <style>
 /* Fix coming in v2.0.8 */
 #core-app-bar {
-    width: auto;
+  width: auto;
 }
 
 #core-app-bar a {
-    text-decoration: none;
+  text-decoration: none;
 }
 </style>

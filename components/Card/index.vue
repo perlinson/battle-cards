@@ -9,12 +9,14 @@
           :alt="card.name"
         />
       </v-badge>
-      <img
+      <v-img
         v-else
         :src="card.card_images[0].image_url"
         v-bind="attrs"
         v-on="on"
         :alt="card.name"
+        contain
+        class="grey lighten-2"
       />
     </template>
     <span>{{ card.name }}</span>
@@ -32,7 +34,6 @@ export default {
   data() {
     return {
       limit: CardHelper.checkBanlist(this.$props.card),
-      
     }
   },
   methods: {},

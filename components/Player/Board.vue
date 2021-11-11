@@ -1,19 +1,11 @@
 <template>
-  <div class="player-board-container">
-    <div class="first-col">
-      <div class="top-row">
-        <PlayerHand :game-state
-      </div>
-    </div>
-  </div>
+  <v-row class="row">
+    <span class="text-h5"> {{ 'Played Cards' }} </span>
+  </v-row>
 </template>
 
 <script>
-export default {
-
-}
+export default {}
 </script>
 
-<style>
-
-</style>
+<style></style>

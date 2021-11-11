@@ -18,15 +18,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.v-app {
-  font-family: '楷体', '楷体_GB2312';
-  @font-face {
-    font-family: '楷体', '楷体_GB2312';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url('~assets/fonts/楷体_GB2312.ttf') format('truetype');
-  }
-}
-</style>
+<style lang="scss" scoped></style>

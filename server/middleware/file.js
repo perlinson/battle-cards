@@ -12,6 +12,7 @@ import {
   ROLE_AVATAR,
   STREAM_AVATAR,
   APPLY_PATH,
+  CARD_PATH,
 } from '../constants/file-path'
 
 const AvataStorage = multer.diskStorage({
@@ -20,6 +21,18 @@ const AvataStorage = multer.diskStorage({
     //第二个字段传文件名
     cb(null, 'ua' + Date.now() + path.extname(file.originalname))
   },
+})
+
+const CardStorage = multer.diskStorage({
+  destination: CARD_PATH,
+  filename: (req, file, cb) => {
+    //第二个字段传文件名
+    cb(null, 'ua' + Date.now() + path.extname(file.originalname))
+  },
+})
+
+const cardUpload = multer({
+  storage: CardStorage,
 })
 
 const AvataUpload = multer({
@@ -148,5 +161,6 @@ export default {
   roleAvatarUpload,
   applyUpoads,
   musicUpload,
+  cardUpload,
   pictureResize,
 }

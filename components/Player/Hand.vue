@@ -1,50 +1,34 @@
 <template>
-  <div class="player-hand-container">
-    <div class="player-hand">
-      <Card
-        v-for="(card, index) in playerHand"
-        :key="index"
-        @click="handleClick"
-      ></Card>
-    </div>
-    <div class="button-container">
-      <GameButton @click="handleClick" :disabled="!canPlay" :text="'Play'" />
-      <GameButton @click="handleClick" :disabled="!canPlay" :text="'Play'" />
-    </div>
-  </div>
+  <v-row v-if="isConnected && isGameStarted">
+    <v-row v-if="!playerHand">
+      <span class="text-h5">{{ 'You have an empty hand' }}</span>
+    </v-row>
+    <v-row v-else class="mt-3">
+      <v-row class="text-h6 ml-3">{{ 'Your hand' }}</v-row>
+      <v-col v-for="card of playerHand" :key="card">
+        <v-card outlined width="100px" height="150px">
+          <v-card-title>{{ card }}</v-card-title>
+          <v-card-actions>
+            <v-spacer />
+            <v-btn outlined rounded text @click="play(card)">
+              {{ 'Play' }}
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-row>
 </template>
-
 <script>
+import { mapActions, mapGetters } from 'vuex';
+
 export default {
-  props: ['gamestate', 'playerData'],
-  methods: {
-    handleClick: function () {
-      // return this.playerData.hand;
-    },
-  },
-
-  data: function () {
-    return {
-      playerHand: this.playerData.hand,
-      canPlay: this.playerData.canPlay,
-    }
-  },
-
+  name: 'PlayerHand',
   computed: {
-    playerHand: function () {
-      return this.playerData.hand;
-    },
-    canPlay: function () {
-      return this.playerData.canPlay;
-    },
+    ...mapGetters(['isConnected', 'isGameStarted', 'playerHand']),
   },
-  watch: {
-    "gameState.phase"() {
-      this.playerHand = newVal.hand;
-      this.canPlay = newVal.canPlay;
-    },
+  methods: {
+    ...mapActions(['play']),
   },
-}
+};
 </script>
-
-<style></style>
