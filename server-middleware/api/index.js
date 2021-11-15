@@ -32,12 +32,12 @@ const router = new Router()
  * @apiParam {String[]} [sort=-createdAt] Order of returned items.
  * @apiParam {String[]} [fields] Fields to be returned.
  */
-router.use('/api/users', user)
-router.use('/api/auth', auth)
-router.use('/api/password-resets', passwordReset)
-router.use('/api/players', player)
-router.use('/api/games', game)
-router.use('/api/cards', card)
-router.use('/api/files', file)
+router.use('/users', user)
+router.use('/auth', auth)
+router.use('/password-resets', passwordReset)
+router.use('/players', player)
+router.use('/games', game)
+router.use('/cards', card)
+router.use('/files', file)
 
 export default router

@@ -3,7 +3,7 @@ import { middleware as query } from 'querymen'
 import { middleware as body } from 'bodymen'
 import { create, all, index, show, update, destroy } from './controller'
 import { schema } from './model'
-export Card, { schema } from './model'
+// export Card, { schema } from './model'
 
 const router = new Router()
 const {
@@ -76,10 +76,7 @@ router.post(
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Card not found.
  */
-router.post(
-  '/all',
-  all
-)
+router.post('/all', all)
 
 /**
  * @api {get} /Cards Retrieve cards

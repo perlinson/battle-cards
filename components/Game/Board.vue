@@ -1,5 +1,5 @@
 <template>
-  <div id="game-board">
+  <!-- <div id="game-board">
     <div class="board-container top-board">
       <player-board
         :gameCards="gameCards"
@@ -41,7 +41,34 @@
         :playerData="bluePlayerData"
       ></player-board>
     </div>
-  </div>
+  </div> -->
+  <v-container class="grey lighten-5" fill-height>
+    <v-row no-gutters>
+      <h1 class="text-center">battle-enemy-hand</h1>
+    </v-row>
+    <v-row no-gutters>
+      <h1 class="text-center">battle-enemy-venue</h1>
+    </v-row>
+    <v-row no-gutters>
+      <h1 class="text-center">battle-my-venue</h1>
+    </v-row>
+    <v-row no-gutters>
+      <v-col xs12>
+        <PlayerHand :cards="cards"></PlayerHand>
+      </v-col>
+    </v-row>
+  </v-container>
+
+  <!-- <v-layout class="battle">
+    <v-row class="mb-6" no-gutters>
+      <v-row class="battle-enemy-hand"></v-row>
+      <v-row class="battle-enemy-venue"></v-row>
+    </v-row>
+    <v-row no-gutters class="mb-6">
+      <v-row class="battle-my-venue"></v-row>
+      <v-row class="battle-my-hand"></v-row>
+    </v-row>
+  </v-layout> -->
 </template>
 
 <script>
@@ -54,61 +81,49 @@ export default {
         eventBus: '',
         skipBattle: true,
       },
-      yellowPlayerData: {
-        player: 'one',
-        eventBus: eventBus1,
-        firstTurn: true,
-        firstDrawAmount: 5,
-      },
-      bluePlayerData: {
-        player: 'two',
-        eventBus: eventBus2,
-        firstTurn: true,
-        firstDrawAmount: 6,
-      },
+      cards: [
+        {
+          image_url: 'slifer.png',
+        },
+        {
+          image_url: 'ra.png',
+        },
+        {
+          image_url: 'obelisk.png',
+        },
+        {
+          image_url: 'slifer.png',
+        },
+      ],
+      // yellowPlayerData: {
+      //   player: 'one',
+      //   eventBus: eventBus1,
+      //   firstTurn: true,
+      //   firstDrawAmount: 5,
+      // },
+      // bluePlayerData: {
+      //   player: 'two',
+      //   eventBus: eventBus2,
+      //   firstTurn: true,
+      //   firstDrawAmount: 6,
+      // },
     }
+  },
+  methods: {
+    handleClick() {
+      this.cards.push({
+        image_url: 'slifer.png',
+      })
+    },
   },
 }
 </script>
 
 <style lang="css" scoped>
-.middle-section {
+.gameBoard {
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  background-color: rgba(250, 140, 110, 0.85);
-}
-.top-board {
-  background-color: rgba(200, 170, 110, 0.85);
-}
-.bottom-board {
-  background-color: rgba(110, 140, 200, 0.85);
-}
-.phase-container {
-  width: 300px;
-  margin: 0 80px;
-}
-h2 {
-  margin: 0;
-}
-i {
-  border: solid black;
-  border-width: 0 3px 3px 0;
-  display: inline-block;
-  padding: 3px;
-}
-.arrow-up {
-  transform: rotate(-135deg);
-  -webkit-transform: rotate(-135deg);
-}
-.arrow-down {
-  transform: rotate(45deg);
-  -webkit-transform: rotate(45deg);
-}
-.button-container {
-  height: 100px;
-}
-.hide {
-  height: 25px;
 }
 </style>

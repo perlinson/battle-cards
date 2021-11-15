@@ -186,7 +186,7 @@ export default {
           login: { url: '/api/auth', method: 'post' },
           //        refresh: { url: "/api/auth/refresh-token", method: "post" },
           logout: false, //  we don't have an endpoint for our logout in our API and we just remove the token from localstorage
-          user: { url: '/api/user', method: 'get' },
+          user: { url: '/api/user/me', method: 'get' },
         },
       },
     },
@@ -196,9 +196,9 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   // axios: { baseURL: 'http://www.perlinson.xyz:8080' },
-  axios: {
-    proxy: true,
-  },
+  // axios: {
+  //   proxy: true,
+  // },
 
   proxy: {
     '/api/': {
@@ -218,4 +218,8 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+
+  serverMiddleware: {
+    '/api': '~/server-middleware/',
+  },
 }

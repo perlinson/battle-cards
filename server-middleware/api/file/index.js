@@ -12,7 +12,7 @@ import {
   musicUpload,
   pictureResize,
 } from '../../middleware/file'
-export File, { schema } from './model'
+// export File, { schema } from './model'
 
 const router = new Router()
 const { title, description, file_path, file_mimetype } = schema.tree

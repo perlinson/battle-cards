@@ -1,9 +1,13 @@
 <template>
-  <GameBoard />
+  <GameBoard class="gameboard" />
 </template>
 
 <script>
-export default {}
+export default {
+  layout: 'game',
+}
 </script>
 
-<style></style>
+<style>
+
+</style>

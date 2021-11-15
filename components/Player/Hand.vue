@@ -1,47 +1,55 @@
 <template>
-  <div class="player-hand-container">
-    <div class="player-hand">
-      <Card
-        v-for="(card, index) in playerHand"
-        :key="index"
-        @click="handleClick"
-      ></Card>
-    </div>
-    <div class="button-container">
-      <GameButton @click="handleClick" :disabled="!canPlay" :text="'Play'" />
-      <GameButton @click="handleClick" :disabled="!canPlay" :text="'Play'" />
-    </div>
-  </div>
+  <!-- <v-row transition="scale-transition">
+    <v-col v-for="(card, index) in cards" :key="index" class="d-flex">
+      <v-img
+        :src="card.image_url"
+        :lazy-src="card.image_url"
+        class="grey lighten-2 sx-2"
+      >
+        <template v-slot:placeholder>
+          <v-row class="fill-height ma-0" align="center" justify="center">
+            <v-progress-circular
+              indeterminate
+              color="grey lighten-5"
+            ></v-progress-circular>
+          </v-row>
+        </template>
+      </v-img>
+    </v-col>
+  </v-row> -->
+
+  <v-layout row nowrap>
+    <v-flex xs3 sm1 md1 v-for="(card, i) in cards" :key="i">
+      <v-img
+        @mouseenter.prevent="previewCard(card)"
+        class="d-flex flex-nowrap"
+        :src="card.image_url"
+        :lazy-src="card.image_url"
+      >
+      </v-img>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
 export default {
-  props: ['gamestate', 'playerData'],
+  props: ['cards'],
   methods: {
-    handleClick: function () {
+    handleClick() {
       // return this.playerData.hand;
     },
+    previewCard(card) {
+      this.$store.dispatch('game/preview_card', card)
+    },
   },
 
-  data: function () {
-    return {
-      playerHand: this.playerData.hand,
-      canPlay: this.playerData.canPlay,
-    }
-  },
-
-  computed: {
-    playerHand: function () {
-      return this.playerData.hand;
-    },
-    canPlay: function () {
-      return this.playerData.canPlay;
-    },
+  data() {
+    return {}
   },
   watch: {
-    "gameState.phase"() {
-      this.playerHand = newVal.hand;
-      this.canPlay = newVal.canPlay;
+    'gameState.phase'(old, newVal) {
+      this.playerHand = newVal.hand
+      this.canPlay = newVal.canPlay
     },
   },
 }

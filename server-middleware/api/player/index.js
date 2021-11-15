@@ -3,7 +3,7 @@ import { middleware as query } from 'querymen'
 import { middleware as body } from 'bodymen'
 import { create, index, show, update, destroy } from './controller'
 import { schema } from './model'
-export Player, { schema } from './model'
+// export Player, { schema } from './model'
 
 const router = new Router()
 const { name, email, wins, losses, ties } = schema.tree
@@ -21,9 +21,7 @@ const { name, email, wins, losses, ties } = schema.tree
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Player not found.
  */
-router.post('/',
-  body({ name, email, wins, losses, ties }),
-  create)
+router.post('/', body({ name, email, wins, losses, ties }), create)
 
 /**
  * @api {get} /players Retrieve players
@@ -34,9 +32,7 @@ router.post('/',
  * @apiSuccess {Object[]} rows List of players.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get('/',
-  query(),
-  index)
+router.get('/', query(), index)
 
 /**
  * @api {get} /players/:id Retrieve player
@@ -46,8 +42,7 @@ router.get('/',
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Player not found.
  */
-router.get('/:id',
-  show)
+router.get('/:id', show)
 
 /**
  * @api {put} /players/:id Update player
@@ -62,9 +57,7 @@ router.get('/:id',
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Player not found.
  */
-router.put('/:id',
-  body({ name, email, wins, losses, ties }),
-  update)
+router.put('/:id', body({ name, email, wins, losses, ties }), update)
 
 /**
  * @api {delete} /players/:id Delete player
@@ -73,7 +66,6 @@ router.put('/:id',
  * @apiSuccess (Success 204) 204 No Content.
  * @apiError 404 Player not found.
  */
-router.delete('/:id',
-  destroy)
+router.delete('/:id', destroy)
 
 export default router
