@@ -6,7 +6,7 @@ import { schema } from './model'
 export Game, { schema } from './model'
 
 const router = new Router()
-const { result, playerX, playerO, position } = schema.tree
+const { name } = schema.tree
 
 /**
  * @api {post} /games Create game
@@ -20,7 +20,7 @@ const { result, playerX, playerO, position } = schema.tree
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Game not found.
  */
-router.post('/', body({ result, playerX, playerO, position }), create)
+router.post('/', body({ name }), create)
 
 /**
  * @api {get} /games Retrieve games
@@ -55,7 +55,7 @@ router.get('/:id', show)
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Game not found.
  */
-router.put('/:id', body({ result, playerX, playerO, position }), update)
+router.put('/:id', body({ name }), update)
 
 /**
  * @api {delete} /games/:id Delete game

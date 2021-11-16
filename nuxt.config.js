@@ -18,7 +18,7 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [{ src: '@/plugins/snakbar', mode: 'client' }],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -40,7 +40,9 @@ export default {
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
     // https://go.nuxtjs.dev/content
-    '@nuxt/content'
+    '@nuxt/content',
+
+    '@nuxtjs/auth-next'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -50,6 +52,20 @@ export default {
   pwa: {
     manifest: {
       lang: 'en'
+    }
+  },
+
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: 'api/auth', method: 'post', propertyName: 'token' },
+          logout: false,
+          user: { url: 'api/users/me', method: 'get', propertyName: 'data' }
+        },
+        tokenRequired: true,
+        tokenType: 'Bearer'
+      }
     }
   },
 
