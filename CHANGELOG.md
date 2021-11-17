@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](///compare/v2.0.1...v2.1.0) (2021-11-17)
+
+
+### Features
+
+* 增加scss 支持 通过@nuxtjs/style-resources 05d95d1
+
 ### [2.0.1](///compare/v2.0.0...v2.0.1) (2021-11-16)
 
 ## [2.0.0](///compare/v1.1.1...v2.0.0) (2021-11-15)
