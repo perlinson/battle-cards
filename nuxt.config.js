@@ -1,6 +1,8 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
+  dev: process.env.NODE_ENV !== 'production',
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: '%s - battleCards',
@@ -28,9 +30,9 @@ export default {
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/vuetify
-    '@nuxtjs/vuetify'
+    '@nuxtjs/vuetify',
 
-    // 'nuxt-vite'
+    '@nuxtjs/style-resources'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -51,6 +53,10 @@ export default {
     manifest: {
       lang: 'en'
     }
+  },
+
+  styleResources: {
+    scss: ['~/assets/vars/*.scss', '~/assets/abstracts/_mixin.scss']
   },
 
   // Content module configuration: https://go.nuxtjs.dev/config-content
