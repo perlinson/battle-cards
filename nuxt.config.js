@@ -14,11 +14,21 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
 
+
+  publicRuntimeConfig: {
+  },
+
+  privateRuntimeConfig: {
+    masterKey : process.env.MASTER_KEY,
+  },
+
+
+
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [{ src: '@/plugins/snakbar', mode: 'client' }],
+  plugins: [{ src: '@/plugins/snakbar', mode: 'client' }, '~/plugins/axios'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -65,27 +75,25 @@ export default {
           type: 'Bearer',
           maxAge: 60
         },
-        // user: {
-        //   property: 'user',
-        //   autoFetch: true
-        // },
+        user: {
+          autoFetch: true
+        },
         endpoints: {
           login: {
             url: '/api/auth',
             method: 'post'
           },
           //        refresh: { url: "/api/auth/refresh-token", method: "post" },
-          logout: false //  we don't have an endpoint for our logout in our API and we just remove the token from localstorage
-          // user: { url: '/api/user/me', method: 'get' }
+          logout: false, //  we don't have an endpoint for our logout in our API and we just remove the token from localstorage
+          user: { url: '/api/users/me', method: 'get' }
         }
       }
     }
   },
 
   router: {
-  middleware: ['auth']
-},
-
+    middleware: ['auth']
+  },
 
   // Content module configuration: https://go.nuxtjs.dev/config-content
   content: {},

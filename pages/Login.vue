@@ -48,9 +48,9 @@
                       block
                       :disabled="!valid"
                       color="success"
-                      @click="validate"
+                      @click="login"
                     >
-                      Login
+                      登录
                     </v-btn>
                   </v-col>
                 </v-row>
@@ -122,8 +122,8 @@
                       block
                       :disabled="!valid"
                       color="success"
-                      @click="validate"
-                      >Register</v-btn
+                      @click="register"
+                      >注册</v-btn
                     >
                   </v-col>
                 </v-row>
@@ -175,22 +175,42 @@ export default {
     },
   },
   methods: {
-    validate() {
-      const that = this;
+    async validate() {
+      const that = this
       if (this.$refs.loginForm.validate()) {
-        this.$auth.loginWith('local', {
-          auth: {
-            username: that.loginEmail,
-            password: that.loginPassword,
-          },
-          data: {
-            access_token: 'FH7s2TrD9iFmFjVfjJECjNfbQEZu5VnB',
-          },
-        })
-        this.reset()
-        this.resetValidation()
+        const res = await this.$auth
+          .loginWith('local', {
+            auth: {
+              username: that.loginEmail,
+              password: that.loginPassword,
+            },
+            data: {
+              access_token: this.$config.masterKey,
+            },
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+        console.log(res)
       }
     },
+
+    async register() {
+      if (this.$refs.registerForm.validate()) {
+        const res = await this.$auth
+          .registerWith('local', {
+            firstName: this.firstName,
+            lastName: this.lastName,
+            email: this.email,
+            password: this.password,
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+        console.log(res)
+      }
+    },
+
     reset() {
       this.$refs.form.reset()
     },
