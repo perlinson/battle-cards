@@ -1,43 +1,87 @@
 import mongoose, { Schema } from 'mongoose'
-
-const gameSchema = new Schema({
-  result: {
-    type: String
+import { User } from '../user'
+const gameSchema = new Schema(
+  {
+    name: {
+      type: String
+    }
+    // creator: {
+    //   type: Schema.Types.ObjectId,
+    //   ref: 'Player'
+    // },
+    // password: {
+    //   type: String
+    // },
+    // players: {
+    //   type: [Schema.Types.ObjectId],
+    //   ref: 'Player'
+    // },
+    // status: {
+    //   type: String
+    // },
+    // currentPlayer: {
+    //   type: Number
+    // },
+    // gameOver: {
+    //   type: String
+    // },
+    // direction: {
+    //   type: Boolean
+    // },
+    // messages: {
+    //   type: [
+    //     {
+    //       type: Schema.Types.ObjectId,
+    //       ref: 'Message'
+    //     }
+    //   ]
+    // },
+    // notification: {
+    //   type: String
+    // }
   },
-  playerX: {
-    type: String
-  },
-  playerO: {
-    type: String
-  },
-  position: {
-    type: String
+  {
+    timestamps: true,
+    toJSON: {
+      virtuals: true,
+      transform: (obj, ret) => {
+        delete ret._id
+      }
+    }
   }
-}, {
-  timestamps: true,
-  toJSON: {
-    virtuals: true,
-    transform: (obj, ret) => { delete ret._id }
-  }
-})
+)
 
 gameSchema.methods = {
-  view (full) {
+  view(full) {
     const view = {
       // simple view
-      id: this.id,
-      result: this.result,
-      playerX: this.playerX,
-      playerO: this.playerO,
-      position: this.position,
-      createdAt: this.createdAt,
-      updatedAt: this.updatedAt
+      id: this._id,
+      name: this.name
+      // creator: this.creator,
+      // password: this.password,
+      // drawPile: this.drawPile,
+      // discardPile: this.discardPile,
+      // players: this.players,
+      // currentPlayer: this.currentPlayer,
+      // status: this.status,
+      // direction: this.direction,
+      // messages: this.messages,
+      // gameOver: this.gameOver,
+      // notification: this.notification
     }
 
-    return full ? {
-      ...view
-      // add properties for a full view
-    } : view
+    return full
+      ? {
+          ...view
+        }
+      : view
+  },
+  join(playerid, password) {
+    if (this.password === password) {
+      const player = User.findById(playerid)
+      this.players.push(player)
+      this.save()
+    }
   }
 }
 

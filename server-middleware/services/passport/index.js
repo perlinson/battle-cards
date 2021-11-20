@@ -43,9 +43,8 @@ passport.use(
   new BasicStrategy((email, password, done) => {
     const userSchema = new Schema({
       email: schema.tree.email,
-      password: schema.tree.password,
+      password: schema.tree.password
     })
-    debugger
     userSchema.validate({ email, password }, (err) => {
       if (err) done(err)
     })
@@ -85,8 +84,8 @@ passport.use(
       jwtFromRequest: ExtractJwt.fromExtractors([
         ExtractJwt.fromUrlQueryParameter('access_token'),
         ExtractJwt.fromBodyField('access_token'),
-        ExtractJwt.fromAuthHeaderWithScheme('Bearer'),
-      ]),
+        ExtractJwt.fromAuthHeaderWithScheme('Bearer')
+      ])
     },
     ({ id }, done) => {
       User.findById(id)

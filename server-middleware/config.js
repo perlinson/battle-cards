@@ -39,9 +39,7 @@ const config = {
   development: {
     mongo: {
       uri: `mongodb+srv://${process.env.MONGO_ALTA_USER}:${process.env.MONGO_ALTA_PWD}@cluster0.gysem.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`,
-      options: {
-        debug: true
-      }
+      options: {}
     }
   },
   production: {

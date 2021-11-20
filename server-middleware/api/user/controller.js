@@ -1,7 +1,7 @@
 import { success, notFound } from '../../services/response'
+import { sign } from '../../services/jwt'
 import { User } from '.'
 
-import { sign } from '../../services/jwt'
 
 export const index = ({ querymen: { query, select, cursor } }, res, next) =>
   User.count(query)
@@ -21,7 +21,7 @@ export const show = ({ params }, res, next) =>
     .then(success(res))
     .catch(next)
 
-export const showMe = ({ user }, res) => res.json(user.view(true))
+export const showMe = ({ user }, res) => res.json({user:user.view(true)})
 
 export const create = ({ bodymen: { body } }, res, next) =>
   User.create(body)

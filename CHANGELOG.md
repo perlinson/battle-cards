@@ -17,6 +17,7 @@ All notable changes to this project will be documented in this file. See [standa
 * **release:** 2.1.0 a0fa57f
 
 ## [2.1.0](///compare/v2.0.1...v2.1.0) (2021-11-17)
+## [2.1.0](///compare/v2.0.0...v2.1.0) (2021-11-16)
 
 
 ### Features
@@ -24,6 +25,7 @@ All notable changes to this project will be documented in this file. See [standa
 * 增加scss 支持 通过@nuxtjs/style-resources 05d95d1
 
 ### [2.0.1](///compare/v2.0.0...v2.0.1) (2021-11-16)
+* 登录注册功能 f128f69
 
 ## [2.0.0](///compare/v1.1.1...v2.0.0) (2021-11-15)
 

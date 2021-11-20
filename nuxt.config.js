@@ -16,11 +16,21 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
 
+
+  publicRuntimeConfig: {
+  },
+
+  privateRuntimeConfig: {
+    masterKey : process.env.MASTER_KEY,
+  },
+
+
+
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [{ src: '@/plugins/snakbar', mode: 'client' }, '~/plugins/axios'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -42,7 +52,9 @@ export default {
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
     // https://go.nuxtjs.dev/content
-    '@nuxt/content'
+    '@nuxt/content',
+
+    '@nuxtjs/auth-next'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -57,6 +69,35 @@ export default {
 
   styleResources: {
     scss: ['~/assets/vars/*.scss', '~/assets/abstracts/_mixin.scss']
+  },
+  auth: {
+    strategies: {
+      local: {
+        token: {
+          property: 'token',
+          global: true,
+          required: true,
+          type: 'Bearer',
+          maxAge: 60
+        },
+        user: {
+          autoFetch: true
+        },
+        endpoints: {
+          login: {
+            url: '/api/auth',
+            method: 'post'
+          },
+          //        refresh: { url: "/api/auth/refresh-token", method: "post" },
+          logout: false, //  we don't have an endpoint for our logout in our API and we just remove the token from localstorage
+          user: { url: '/api/users/me', method: 'get' }
+        }
+      }
+    }
+  },
+
+  router: {
+    middleware: ['auth']
   },
 
   // Content module configuration: https://go.nuxtjs.dev/config-content
