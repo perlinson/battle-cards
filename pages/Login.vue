@@ -97,7 +97,7 @@
                       :type="show1 ? 'text' : 'password'"
                       name="input-10-1"
                       label="Password"
-                      hint="At least 8 characters"
+                      hint="At least 6 characters"
                       counter
                       @click:append="show1 = !show1"
                     ></v-text-field>
@@ -166,7 +166,7 @@ export default {
     show1: false,
     rules: {
       required: (value) => !!value || 'Required.',
-      min: (v) => (v && v.length >= 8) || 'Min 8 characters',
+      min: (v) => (v && v.length >= 6) || 'Min 6 characters',
     },
   }),
   computed: {
@@ -176,11 +176,15 @@ export default {
   },
   methods: {
     validate() {
+      const that = this;
       if (this.$refs.loginForm.validate()) {
         this.$auth.loginWith('local', {
+          auth: {
+            username: that.loginEmail,
+            password: that.loginPassword,
+          },
           data: {
-            email: this.loginEmail,
-            password: this.loginPassword,
+            access_token: 'FH7s2TrD9iFmFjVfjJECjNfbQEZu5VnB',
           },
         })
         this.reset()

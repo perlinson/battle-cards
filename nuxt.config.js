@@ -58,16 +58,34 @@ export default {
   auth: {
     strategies: {
       local: {
-        endpoints: {
-          login: { url: 'api/auth', method: 'post', propertyName: 'token' },
-          logout: false,
-          user: { url: 'api/users/me', method: 'get', propertyName: 'data' }
+        token: {
+          property: 'token',
+          global: true,
+          required: true,
+          type: 'Bearer',
+          maxAge: 60
         },
-        tokenRequired: true,
-        tokenType: 'Bearer'
+        // user: {
+        //   property: 'user',
+        //   autoFetch: true
+        // },
+        endpoints: {
+          login: {
+            url: '/api/auth',
+            method: 'post'
+          },
+          //        refresh: { url: "/api/auth/refresh-token", method: "post" },
+          logout: false //  we don't have an endpoint for our logout in our API and we just remove the token from localstorage
+          // user: { url: '/api/user/me', method: 'get' }
+        }
       }
     }
   },
+
+  router: {
+  middleware: ['auth']
+},
+
 
   // Content module configuration: https://go.nuxtjs.dev/config-content
   content: {},
