@@ -175,8 +175,9 @@ export default {
     },
   },
   methods: {
-    async validate() {
+    async login() {
       const that = this
+      console.log('this.$config.masterKey', this.$config)
       if (this.$refs.loginForm.validate()) {
         const res = await this.$auth
           .loginWith('local', {

@@ -1,7 +1,7 @@
 <template>
-  <v-container fluid pt-16>
+  <v-container fill-height fluid>
     <v-row justify="center">
-      <v-card class="elevation-12" outlined width="1000">
+      <v-card outlined width="1000">
         <v-card-title style="background-color: #007bc7">
           <small>游戏列表</small>
           <v-spacer></v-spacer>
