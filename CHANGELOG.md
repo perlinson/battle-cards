@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](///compare/v2.2.1...v3.0.0) (2021-11-25)
+
+
+### ⚠ BREAKING CHANGES
+
+* 增加了国际化功能
+
+### Features
+
+* 增加多语言支持 196b7f0
+
+
+### Others
+
+* 增加了一些 ui界面 7983e88
+
+## [2.1.0](///compare/v2.0.0...v2.1.0) (2021-11-16)
+
+
+### Features
+
+* 登录注册功能 f128f69
+
+
+### Others
+
+* **release:** 2.1.0 bc25e34
+
 ### [2.2.1](///compare/v2.2.0...v2.2.1) (2021-11-17)
 
 ## [2.2.0](///compare/v2.0.1...v2.2.0) (2021-11-17)
