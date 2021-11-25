@@ -39,14 +39,14 @@
       <v-list-item
         v-for="(link, i) in links"
         :key="i"
-        :to="link.to"
+        :to="localePath(link.to)"
         active-class="primary white--text"
       >
         <v-list-item-action>
           <v-icon>{{ link.icon }}</v-icon>
         </v-list-item-action>
 
-        <v-list-item-title v-text="link.text" />
+        <v-list-item-title>{{ $t(link.text) }}</v-list-item-title>
       </v-list-item>
     </v-list>
 
@@ -80,55 +80,55 @@ export default {
   data: () => ({
     links: [
       {
-        to: '/',
+        to: '/dashboard',
         icon: 'mdi-view-dashboard',
-        text: 'Dashboard',
+        text: 'drawer.dashboard',
       },
       {
         to: '/Lobby',
         icon: 'mdi-account',
-        text: '游戏大厅',
+        text: 'drawer.lobby',
       },
       {
         to: '/user-profile',
         icon: 'mdi-account',
-        text: '用户资料',
+        text: 'drawer.profile',
       },
       {
         to: '/user-deck',
         icon: 'mdi-account',
-        text: '我的卡组',
+        text: 'drawer.deck',
       },
-      {
-        to: '/user-manage',
-        icon: 'mdi-account',
-        text: '用户管理',
-      },
-      {
-        to: '/table-list',
-        icon: 'mdi-clipboard-outline',
-        text: 'Table List',
-      },
-      {
-        to: '/typography',
-        icon: 'mdi-format-font',
-        text: 'Typography',
-      },
-      {
-        to: '/icons',
-        icon: 'mdi-chart-bubble',
-        text: 'Icons',
-      },
-      {
-        to: '/maps',
-        icon: 'mdi-map-marker',
-        text: 'Maps',
-      },
-      {
-        to: '/notifications',
-        icon: 'mdi-bell',
-        text: 'Notifications',
-      },
+      // {
+      //   to: '/user-manage',
+      //   icon: 'mdi-account',
+      //   text: 'drawer.user-manage',
+      // },
+      // {
+      //   to: '/table-list',
+      //   icon: 'mdi-clipboard-outline',
+      //   text: 'drawer.table-ist',
+      // },
+      // {
+      //   to: '/typography',
+      //   icon: 'mdi-format-font',
+      //   text: 'drawer.Typography',
+      // },
+      // {
+      //   to: '/icons',
+      //   icon: 'mdi-chart-bubble',
+      //   text: 'drawer.Icons',
+      // },
+      // {
+      //   to: '/maps',
+      //   icon: 'mdi-map-marker',
+      //   text: 'drawer.Maps',
+      // },
+      // {
+      //   to: '/notifications',
+      //   icon: 'mdi-bell',
+      //   text: 'drawer.Notifications',
+      // },
     ],
   }),
 

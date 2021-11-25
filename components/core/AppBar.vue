@@ -52,8 +52,8 @@
             </v-list>
           </v-card>
         </v-menu>
-
-        <v-btn to="/user-profile" icon>
+        <toolbar-language />
+        <v-btn :to="localePath('/user-profile')" icon>
           <v-icon color="tertiary">mdi-account</v-icon>
         </v-btn>
       </v-row>
@@ -66,6 +66,18 @@
 import { mapMutations } from 'vuex'
 
 export default {
+  props: {
+    // Show dropdown arrow
+    showArrow: {
+      type: Boolean,
+      default: false,
+    },
+    // Show the country label
+    showLabel: {
+      type: Boolean,
+      default: true,
+    },
+  },
   data: () => ({
     notifications: [
       'Mike, John responded to your email',
@@ -77,13 +89,11 @@ export default {
     title: null,
     responsive: false,
   }),
-
   watch: {
     $route(val) {
       this.title = val.name
     },
   },
-
   mounted() {
     this.onResponsiveInverted()
     window.addEventListener('resize', this.onResponsiveInverted)

@@ -1,5 +1,7 @@
 import colors from 'vuetify/es5/util/colors'
+import config from './configs'
 
+const { locale, availableLocales, fallbackLocale } = config.locales
 export default {
   dev: process.env.NODE_ENV !== 'production',
 
@@ -46,6 +48,21 @@ export default {
     '@nuxtjs/style-resources'
   ],
 
+  i18n: {
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      redirectOn: 'root' // recommended
+    },
+    locales: availableLocales,
+    defaultLocale: locale,
+    lazy: true,
+    langDir: 'translations/',
+    vueI18n: {
+      fallbackLocale
+    }
+  },
+
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
@@ -55,7 +72,8 @@ export default {
     // https://go.nuxtjs.dev/content
     '@nuxt/content',
 
-    '@nuxtjs/auth-next'
+    '@nuxtjs/auth-next',
+    '@nuxtjs/i18n'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
