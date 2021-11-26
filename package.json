@@ -21,6 +21,7 @@
     "@nuxtjs/i18n": "^7.2.0",
     "@nuxtjs/pwa": "^3.3.5",
     "@nuxtjs/style-resources": "^1.2.1",
+    "animate.css": "^4.1.1",
     "bcryptjs": "^2.4.3",
     "bluebird": "^3.7.2",
     "bodymen": "^1.1.1",
