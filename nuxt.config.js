@@ -1,5 +1,7 @@
 import colors from 'vuetify/es5/util/colors'
+import config from './configs'
 
+const { locale, availableLocales, fallbackLocale } = config.locales
 export default {
   dev: process.env.NODE_ENV !== 'production',
 
@@ -16,21 +18,22 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
 
-
   publicRuntimeConfig: {
+    baseURL: 'https://nuxtjs.org',
+    masterKey: process.env.MASTER_KEY || 'masterkey'
   },
-
-  privateRuntimeConfig: {
-    masterKey : process.env.MASTER_KEY,
-  },
-
-
+  privateRuntimeConfig: {},
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [{ src: '@/plugins/snakbar', mode: 'client' }, '~/plugins/axios'],
+  plugins: [
+    '~/plugins/chartist.js',
+    '~/plugins/components.js',
+    '~/plugins/axios',
+    { src: '@/plugins/snakbar', mode: 'client' }
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -45,6 +48,21 @@ export default {
     '@nuxtjs/style-resources'
   ],
 
+  i18n: {
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      redirectOn: 'root' // recommended
+    },
+    locales: availableLocales,
+    defaultLocale: locale,
+    lazy: true,
+    langDir: 'translations/',
+    vueI18n: {
+      fallbackLocale
+    }
+  },
+
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
@@ -54,7 +72,8 @@ export default {
     // https://go.nuxtjs.dev/content
     '@nuxt/content',
 
-    '@nuxtjs/auth-next'
+    '@nuxtjs/auth-next',
+    '@nuxtjs/i18n'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -78,7 +97,7 @@ export default {
           global: true,
           required: true,
           type: 'Bearer',
-          maxAge: 60
+          maxAge: 60 * 60 * 24 * 7
         },
         user: {
           autoFetch: true

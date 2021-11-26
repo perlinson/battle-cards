@@ -1,6 +1,6 @@
 <template>
   <v-container fill-height fluid>
-    <v-row justify="center">
+    <v-row justify="start">
       <v-col cols="12" md="8">
         <material-card color="green" title="编辑用户信息" text="完善你的资料">
           <v-form>
