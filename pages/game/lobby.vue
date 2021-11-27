@@ -1,8 +1,8 @@
 <template>
   <v-container fill-height fluid>
     <v-row justify="center">
-      <v-card outlined width="1000">
-        <v-card-title style="background-color: #007bc7">
+      <v-card outlined width="100%">
+        <v-card-title style="background-color: #333">
           <small>游戏列表</small>
           <v-spacer></v-spacer>
           <v-text-field

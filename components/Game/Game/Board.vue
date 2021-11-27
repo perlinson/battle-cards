@@ -1,4 +1,27 @@
 <template>
+  <v-container id="game-board" class="d-flex flex-column">
+    <v-row>
+      <v-col cols="12" align="start">
+        <oppo-field id="opphand" />
+      </v-col>
+    </v-row>
+    <v-spacer />
+    <v-row align="end">
+      <v-col cols="12">
+        <player-field id="youhand" />
+      </v-col>
+    </v-row>
+    <!-- <v-row align="start"> align-start</v-row>
+    <v-row align="center"> </v-row>
+    <v-row align="end">align-end</v-row>
+    <v-row align="stretch"></v-row>
+    <v-row justify="start"></v-row>
+    <v-row justify="center"></v-row>
+    <v-row justify="end"></v-row>
+    <v-row justify="space-around"></v-row>
+    <v-row justify="space-between"></v-row> -->
+  </v-container>
+
   <!-- <div id="game-board">
     <div class="board-container top-board">
       <player-board
@@ -42,7 +65,7 @@
       ></player-board>
     </div>
   </div> -->
-  <v-container class="grey lighten-5" fill-height>
+  <!-- <v-container class="grey lighten-5" fill-height>
     <v-row no-gutters class="board-container top-board">
       <h1 class="text-center">battle-enemy-hand</h1>
     </v-row>
@@ -57,7 +80,7 @@
         <PlayerHand :cards="cards"></PlayerHand>
       </v-col>
     </v-row>
-  </v-container>
+  </v-container> -->
 
   <!-- <v-layout class="battle">
     <v-row class="mb-6" no-gutters>
@@ -120,10 +143,20 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.gameBoard {
+#gameBoard {
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+}
+
+#youhand,
+#opphand {
+  background: rgba(0, 0, 0, 0.5);
+  outline: 1px solid white;
+  text-align: center;
+  position: relative;
 }
 </style>

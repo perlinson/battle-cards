@@ -1,6 +1,6 @@
 <template>
   <v-main>
-    <v-container id="core-view">
+    <v-container id="core-view" fill-height>
       <v-fade-transition mode="out-in">
         <nuxt></nuxt>
       </v-fade-transition>

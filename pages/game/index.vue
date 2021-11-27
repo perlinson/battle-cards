@@ -1,13 +1,13 @@
 <template>
-  <h1> Game Playing </h1>
+  <div>
+    <game-board style="width: 80vw" fill-height />
+  </div>
 </template>
 
 <script>
 export default {
-
+  layout: 'game',
 }
 </script>
 
-<style>
-
-</style>
+<style></style>

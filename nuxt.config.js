@@ -30,13 +30,12 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '~/plugins/chartist.js',
-    '~/plugins/components.js',
     '~/plugins/axios',
     { src: '@/plugins/snakbar', mode: 'client' }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
+  components: ['~/components/app', '~/components/game'],
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [

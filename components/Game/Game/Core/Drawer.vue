@@ -2,7 +2,6 @@
   <v-navigation-drawer
     id="app-drawer"
     v-model="inputValue"
-    :src="image"
     app
     color="grey darken-2"
     dark
@@ -11,6 +10,7 @@
     persistent
     width="260"
   >
+    <!--   
     <template #img="attrs">
       <v-img
         v-bind="attrs"
@@ -33,9 +33,7 @@
     <v-divider class="mx-3 mb-3" />
 
     <v-list nav>
-      <!-- Bug in Vuetify for first child of v-list not receiving proper border-radius -->
       <div />
-
       <v-list-item
         v-for="(link, i) in links"
         :key="i"
@@ -63,6 +61,7 @@
         </v-list-item>
       </v-list>
     </template>
+ -->
   </v-navigation-drawer>
 </template>
 
@@ -99,36 +98,6 @@ export default {
         icon: 'mdi-account',
         text: 'drawer.deck',
       },
-      // {
-      //   to: '/user-manage',
-      //   icon: 'mdi-account',
-      //   text: 'drawer.user-manage',
-      // },
-      // {
-      //   to: '/table-list',
-      //   icon: 'mdi-clipboard-outline',
-      //   text: 'drawer.table-ist',
-      // },
-      // {
-      //   to: '/typography',
-      //   icon: 'mdi-format-font',
-      //   text: 'drawer.Typography',
-      // },
-      // {
-      //   to: '/icons',
-      //   icon: 'mdi-chart-bubble',
-      //   text: 'drawer.Icons',
-      // },
-      // {
-      //   to: '/maps',
-      //   icon: 'mdi-map-marker',
-      //   text: 'drawer.Maps',
-      // },
-      // {
-      //   to: '/notifications',
-      //   icon: 'mdi-bell',
-      //   text: 'drawer.Notifications',
-      // },
     ],
   }),
 

@@ -258,5 +258,68 @@ export default {
     dashboard: 'Dashboard',
     profile: 'User Profile',
     deck: 'Deck'
+  },
+  kingdomCity: 'Kingdom capital',
+  kingdomCityInfo:
+    'An ancient kingdom of people who have found shelter in a cozy valley surrounded by mountains. Only these mountains protect it from the wastelands with cruel and bloodthirsty nomads.',
+  kingdomValley: 'Blooming valley',
+  kingdomValleyInfo: '',
+  volcano: 'Dragon volcano',
+  volcanoInfo:
+    'According to legend, the dragon will wake up and destroy the kingdom. Terrible times have come and the prophecy has begun to come true ...',
+  pass: 'Mountain pass',
+  passInfo:
+    'The only way out of the valley. The Great Wall, built by the ancestors, has protected the Kingdom from raids for centuries.',
+  expedition: 'Expedition',
+  expeditionInfo: 'Equip an expedition to explore new territories',
+  objectsNotPresent: 'Objects are not present or hidden',
+  unitsNotPresent: 'Units are not present or hidden',
+
+  buildPlaces: 'Construction site',
+  upgradeCost: 'Upgrade cost',
+  order: 'Order',
+  autoorder: 'Autoorder',
+  upgrade: 'Upgrade',
+  descriptions: {
+    farming1: 'Produced 1 food in 30 sec',
+    farming2: 'Produced 2 food in 27 sec',
+    farming3: 'Produced 3 food in 24 sec',
+    farming4: 'Produced 4 food in 21 sec',
+    farming5: 'Produced 5 food in 15 sec',
+    cultivation1: 'Replenishes 100 food in 15 min',
+    cultivation2: 'Replenishes 120 food in 14 min',
+    cultivation3: 'Replenishes 140 food in 13 min',
+    cultivation4: 'Replenishes 160 food in 12 min',
+    cultivation5: 'Replenishes 180 food in 10 min',
+    population1: 'Replenishes population by 1 in 10 minutes',
+    population2: 'Replenishes population by 1 in 9 minutes',
+    population3: 'Replenishes population by 2 in 8 minutes',
+    population4: 'Replenishes population by 2 in 7 minutes',
+    population5: 'Replenishes population by 3 in 5 minutes'
+  },
+  resources: {
+    orders: 'Orders',
+    gold: 'Gold',
+    people: 'People',
+    food: 'Food',
+    wood: 'Wood',
+    stone: 'Stone',
+    ore: 'Ore',
+    mana: 'Mana',
+    artefact: 'Artefact'
+  },
+  objects: {
+    academy: 'Academy',
+    barracks: 'Barracks',
+    castle: 'Castle',
+    farm: 'Farm',
+    field: 'Field',
+    goldmine: 'Goldmine',
+    mine: 'Mine',
+    sawmill: 'Sawmill',
+    statue: 'Warrior Statue',
+    village: 'Village',
+    volcano: 'Volcano',
+    wall: 'Wall'
   }
 }
