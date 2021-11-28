@@ -4,18 +4,26 @@ const gameSchema = new Schema(
   {
     name: {
       type: String
-    }
-    // creator: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: 'Player'
-    // },
-    // password: {
-    //   type: String
-    // },
-    // players: {
-    //   type: [Schema.Types.ObjectId],
-    //   ref: 'Player'
-    // },
+    },
+    creator: {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    },
+
+    maxPlayers: {
+      type: Number,
+      default: 2
+    },
+
+    started: { type: Boolean, default: false }, // is game started?
+    ended: { type: Boolean, default: false }, // is game ended?
+    players: {
+      type: [Schema.Types.ObjectId],
+      ref: 'Player'
+    },
+    actualPlayer: { type: Number }, // who's turn is it (in not zero player number)
+    turns: { type: Number, default: 0 } // how many turns have been played
+
     // status: {
     //   type: String
     // },
@@ -81,6 +89,37 @@ gameSchema.methods = {
       const player = User.findById(playerid)
       this.players.push(player)
       this.save()
+    }
+  },
+
+  addPlayer(user) {
+    if (
+      this.players.length < this.maxPlayers &&
+      !this.players.includes(user.id)
+    ) {
+      this.players.push(user.id)
+      this.save()
+      return true
+    } else {
+      return false
+    }
+  },
+
+  canJoin(player) {
+    if (
+      !this.started &&
+      this.players.length < this.maxPlayers &&
+      !this.isPlayer(player)
+    ) {
+      return true
+    }
+    return false
+  },
+  nextTurn(player) {
+    ++this.actualPlayer
+    ++this.turns
+    if (this.actualPlayer > this.maxPlayers) {
+      this.actualPlayer = 1
     }
   }
 }

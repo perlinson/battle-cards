@@ -72,7 +72,9 @@ export default {
     '@nuxt/content',
 
     '@nuxtjs/auth-next',
-    '@nuxtjs/i18n'
+    '@nuxtjs/i18n',
+
+    'nuxt-socket-io'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -89,6 +91,12 @@ export default {
     scss: ['~/assets/vars/*.scss', '~/assets/abstracts/_mixin.scss']
   },
   auth: {
+    redirect: {
+      login: '/login',
+      logout: '/',
+      callback: '/login',
+      home: '/dashboard'
+    },
     strategies: {
       local: {
         token: {
@@ -140,10 +148,26 @@ export default {
     }
   },
 
+  io: {
+    sockets: [
+      {
+        name: 'home',
+        default: true,
+        vuex: {
+          mutations: [{ progress: 'examples/SET_PROGRESS' }],
+          actions: [{ chatMessage: 'FORMAT_MESSAGE' }]
+        },
+        namespaces: {
+          '/index': {}
+        }
+      }
+    ]
+  },
+
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 
   serverMiddleware: {
-    '/api': '~/server-middleware/'
+    '/api': '~/server/'
   }
 }

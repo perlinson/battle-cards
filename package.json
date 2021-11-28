@@ -34,6 +34,7 @@
     "mongoose-keywords": "^0.4.0",
     "morgan": "^1.9.1",
     "nuxt": "^2.15.7",
+    "nuxt-socket-io": "^2.0.0",
     "passport": "^0.4.1",
     "passport-http": "^0.3.0",
     "passport-http-bearer": "^1.0.1",

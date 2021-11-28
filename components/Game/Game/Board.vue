@@ -1,25 +1,135 @@
 <template>
-  <v-container id="game-board" class="d-flex flex-column">
-    <v-row>
-      <v-col cols="12" align="start">
-        <oppo-field id="opphand" />
-      </v-col>
-    </v-row>
-    <v-spacer />
-    <v-row align="end">
-      <v-col cols="12">
-        <player-field id="youhand" />
-      </v-col>
-    </v-row>
-    <!-- <v-row align="start"> align-start</v-row>
-    <v-row align="center"> </v-row>
-    <v-row align="end">align-end</v-row>
-    <v-row align="stretch"></v-row>
-    <v-row justify="start"></v-row>
-    <v-row justify="center"></v-row>
-    <v-row justify="end"></v-row>
-    <v-row justify="space-around"></v-row>
-    <v-row justify="space-between"></v-row> -->
+  <v-container id="game-container" class="d-flex flex-column">
+    <div v-if="isLandscape" id="details">
+      <div
+        v-if="hasSelectedCard"
+        class="closeDetails"
+        @click="setSelectedCard(undefined)"
+      >
+        &#10005;
+      </div>
+      <battle-kards-details />
+    </div>
+    <div
+      v-if="!isLandscape"
+      v-show="showModal || hasSelectedCard"
+      id="detailsModal"
+    >
+      <div
+        class="closeDetails"
+        @click="
+          setShowModal(false),
+          setSelectedCard(undefined)
+        "
+      >
+        &#10005;
+      </div>
+      <battle-kards-details />
+    </div>
+    <div id="game">
+      <div class="bar">
+        <div class="deck flexEven">
+          <div class="iconContainer">
+            <img src="deck.svg" alt="Deck:" class="icon" />
+            <span class="iconTitle">x&nbsp;{{ opponent.deckSize }}</span>
+          </div>
+        </div>
+        <div class="shields">
+          <div class="iconContainer">
+            <img src="shield.svg" alt="Shields:" class="icon" />
+            <span class="iconTitle">x&nbsp;</span>
+          </div>
+        </div>
+        <div class="hand flexEven">
+          <div class="iconContainer right">
+            <img src="/card.svg" alt="Cards:" class="icon" />
+            <span class="iconTitle">x&nbsp;</span>
+          </div>
+        </div>
+      </div>
+      <div id="opponent">
+        <div class="traps scrollX">
+          <div class="scrollXCardContainer">
+            <div v-for="n in 0" :key="n" class="card cardFacedown"></div>
+            <div v-for="n in 5" :key="n" class="card cardPlaceholder"></div>
+          </div>
+        </div>
+        <div class="monsters scrollX">
+          <div class="scrollXCardContainer">
+            <card
+              v-for="card in 0"
+              :key="card.id"
+              :card="card"
+              card-field="opponentMonster"
+            />
+            <div v-for="n in 5" :key="n" class="card cardPlaceholder"></div>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div id="me">
+        <div class="monsters scrollX">
+          <div class="scrollXCardContainer">
+            <card
+              v-for="card in 0"
+              :key="card.id"
+              :card="card"
+              card-field="myMonster"
+            />
+            <div v-for="n in 5" :key="n" class="card cardPlaceholder"></div>
+          </div>
+        </div>
+        <div class="traps scrollX">
+          <div class="scrollXCardContainer">
+            <div
+              v-for="n in 5 - myPlayer.traps.length"
+              :key="n"
+              class="card cardPlaceholder"
+            ></div>
+          </div>
+        </div>
+        <div class="hand scrollX">
+          <div
+            class="scrollXCardContainer"
+            :style="{ width: myPlayer.hand.length * 12 + 'vh' }"
+          >
+            <card
+              v-for="card in myPlayer.hand"
+              :key="card.id"
+              :card="card"
+              card-field="myHand"
+            />
+          </div>
+        </div>
+      </div>
+      <div id="bottomBar" class="bar">
+        <div class="deck flexEven">
+          <div class="iconContainer">
+            <img src="/deck.svg" alt="Deck:" class="icon" />
+            <span class="iconTitle">x&nbsp;{{ myPlayer.deckSize }}</span>
+          </div>
+        </div>
+        <div class="shields">
+          <div class="iconContainer">
+            <img src="/shield.svg" alt="Shields:" class="icon" />
+            <span class="iconTitle">x&nbsp;{{ myPlayer.shieldsSize }}</span>
+          </div>
+        </div>
+        <div class="flexEven">
+          <div
+            v-if="!isLandscape"
+            class="iconContainer right circle"
+            :class="{ pulse: endTurnIsOnlyMove && !showModal }"
+            @click="
+              setShowModal(true),
+              setSelectedCard(undefined)
+            "
+          >
+            <span id="actionIcon" class="unicodeIcon"> &#9876; </span>
+          </div>
+        </div>
+      </div>
+    </div>
   </v-container>
 
   <!-- <div id="game-board">

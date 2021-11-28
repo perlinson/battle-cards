@@ -159,8 +159,8 @@ export default {
       },
       createDialog: {
         visible: false,
-        name: 'Joshon',
-        creator: 'my',
+        name: '',
+        creator: this.$auth.user.id,
       },
     }
   },
@@ -224,10 +224,14 @@ export default {
         return
       }
 
-      this.$axios.$post('/api/games/', {
-        name: this.createDialog.name,
-        creator: this.createDialog.creator,
-      })
+      this.$axios
+        .$post('/api/games/', {
+          name: this.createDialog.name,
+          creator: this.createDialog.creator,
+        })
+        .then((game) => {
+          this.$router.push(`/game/${game.id}`)
+        })
 
       this.createDialog.visible = false
 
