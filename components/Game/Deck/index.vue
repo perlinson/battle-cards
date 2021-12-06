@@ -1,5 +1,8 @@
 <template>
   <v-layout column class="pa-0" justify-space-between>
+    <v-col no-gutters>
+      
+    </v-col>
     <v-flex>
       <p class="font-weight-bold mt-15">
         Check out some of today’s popular shots

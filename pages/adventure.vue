@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  layout: 'adventure',
+  layout: 'AdventureLayout',
   computed: {
     locations() {
       return this.$store.state.game.locations

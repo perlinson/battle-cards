@@ -137,7 +137,7 @@
 </template>
 <script>
 export default {
-  layout: 'auth',
+  layout: 'AuthLayout',
   data: () => ({
     dialog: true,
     tab: 0,

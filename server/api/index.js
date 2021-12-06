@@ -3,8 +3,8 @@ import user from './user'
 import auth from './auth'
 import player from './player'
 import game from './game'
-import card from './Card'
-
+import deck from './deck'
+import card from './card'
 const router = new Router()
 
 /**
@@ -34,6 +34,7 @@ router.use('/users', user)
 router.use('/auth', auth)
 router.use('/players', player)
 router.use('/games', game)
+router.use('/decks', deck)
 router.use('/cards', card)
 
 export default router

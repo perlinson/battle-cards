@@ -4,37 +4,37 @@ const cardSchema = new Schema(
   {
     name: {
       type: String,
+      required: true
+    },
+    cardType: {
+      type: String,
+      required: true
+    },
+    cost: { type: Number, required: true, default: 1 },
+    content: {
+      type: String,
+      required: true
+    },
+    attack: {
+      type: Number,
+      required: true,
+      default: 0
+    },
+    life: {
+      type: Number,
+      required: true,
+      default: 0
+    },
+    attackBase: { type: Number, required: true, default: 0 },
+    lifeBase: {
+      type: Number,
+      required: true,
+      default: 0
     },
     type: {
-      type: String,
-    },
-    desc: {
-      type: String,
-    },
-    atk: {
-      type: String,
-    },
-    def: {
-      type: String,
-    },
-    level: {
-      type: String,
-    },
-    race: {
-      type: String,
-    },
-    attribute: {
-      type: String,
-    },
-    card_images: {
-      type: Object,
-    },
-    card_prices: {
-      type: String,
-    },
-    game: {
-      type: String,
-    },
+      type: Array,
+      default: []
+    }
   },
   {
     timestamps: true,
@@ -42,8 +42,8 @@ const cardSchema = new Schema(
       virtuals: true,
       transform: (obj, ret) => {
         delete ret._id
-      },
-    },
+      }
+    }
   }
 )
 
@@ -53,27 +53,26 @@ cardSchema.methods = {
       // simple view
       id: this.id,
       name: this.name,
+      cardType: this.cardType,
+      cost: this.cost,
+      content: this.content,
+      attack: this.attack,
+      life: this.life,
+      attackBase: this.attackBase,
+      lifeBase: this.lifeBase,
       type: this.type,
-      desc: this.desc,
-      atk: this.atk,
-      def: this.def,
-      level: this.level,
-      race: this.race,
-      attribute: this.attribute,
-      card_images: this.card_images,
-      card_prices: this.card_prices,
-      game: this.game,
+
       createdAt: this.createdAt,
-      updatedAt: this.updatedAt,
+      updatedAt: this.updatedAt
     }
 
     return full
       ? {
-          ...view,
+          ...view
           // add properties for a full view
         }
       : view
-  },
+  }
 }
 
 const model = mongoose.model('Card', cardSchema)

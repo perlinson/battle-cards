@@ -11,7 +11,7 @@
     "lint": "npm run lint:js",
     "test": "jest",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-    "release": "standard-version -- --release-as major",
+    "release": "standard-version",
     "commit": "git-cz"
   },
   "dependencies": {
@@ -30,7 +30,9 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "flag-icon-css": "^3.5.0",
+    "loadash": "^1.0.0",
     "mongoose": "^6.0.12",
+    "mongoose-autopopulate": "^0.16.0",
     "mongoose-keywords": "^0.4.0",
     "morgan": "^1.9.1",
     "nuxt": "^2.15.7",

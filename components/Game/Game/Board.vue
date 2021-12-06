@@ -1,3 +1,8 @@
+
+
+
+
+<!-- 
 <template>
   <v-container id="game-container" class="d-flex flex-column">
     <div v-if="isLandscape" id="details">
@@ -17,10 +22,7 @@
     >
       <div
         class="closeDetails"
-        @click="
-          setShowModal(false),
-          setSelectedCard(undefined)
-        "
+        @click="setShowModal(false), setSelectedCard(undefined)"
       >
         &#10005;
       </div>
@@ -106,13 +108,13 @@
         <div class="deck flexEven">
           <div class="iconContainer">
             <img src="/deck.svg" alt="Deck:" class="icon" />
-            <span class="iconTitle">x&nbsp;{{ myPlayer.deckSize }}</span>
+            <span class="iconTitle">x&nbsp;</span>
           </div>
         </div>
         <div class="shields">
           <div class="iconContainer">
             <img src="/shield.svg" alt="Shields:" class="icon" />
-            <span class="iconTitle">x&nbsp;{{ myPlayer.shieldsSize }}</span>
+            <span class="iconTitle">x&nbsp;</span>
           </div>
         </div>
         <div class="flexEven">
@@ -120,16 +122,16 @@
             v-if="!isLandscape"
             class="iconContainer right circle"
             :class="{ pulse: endTurnIsOnlyMove && !showModal }"
-            @click="
-              setShowModal(true),
-              setSelectedCard(undefined)
-            "
+            @click="setShowModal(true), setSelectedCard(undefined)"
           >
             <span id="actionIcon" class="unicodeIcon"> &#9876; </span>
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
+
+    
+
   </v-container>
 
   <!-- <div id="game-board">
@@ -201,7 +203,7 @@
       <v-row class="battle-my-venue"></v-row>
       <v-row class="battle-my-hand"></v-row>
     </v-row>
-  </v-layout> -->
+  </v-layout> 
 </template>
 
 <script>
@@ -270,3 +272,4 @@ export default {
   position: relative;
 }
 </style>
+-->

@@ -90,6 +90,11 @@ export default {
         text: 'drawer.lobby',
       },
       {
+        to: '/cards',
+        icon: 'mdi-account',
+        text: 'drawer.card',
+      },
+      {
         to: '/users/profile',
         icon: 'mdi-account',
         text: 'drawer.profile',
@@ -99,36 +104,6 @@ export default {
         icon: 'mdi-account',
         text: 'drawer.deck',
       },
-      // {
-      //   to: '/user-manage',
-      //   icon: 'mdi-account',
-      //   text: 'drawer.user-manage',
-      // },
-      // {
-      //   to: '/table-list',
-      //   icon: 'mdi-clipboard-outline',
-      //   text: 'drawer.table-ist',
-      // },
-      // {
-      //   to: '/typography',
-      //   icon: 'mdi-format-font',
-      //   text: 'drawer.Typography',
-      // },
-      // {
-      //   to: '/icons',
-      //   icon: 'mdi-chart-bubble',
-      //   text: 'drawer.Icons',
-      // },
-      // {
-      //   to: '/maps',
-      //   icon: 'mdi-map-marker',
-      //   text: 'drawer.Maps',
-      // },
-      // {
-      //   to: '/notifications',
-      //   icon: 'mdi-bell',
-      //   text: 'drawer.Notifications',
-      // },
     ],
   }),
 
