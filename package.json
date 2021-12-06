@@ -1,6 +1,6 @@
 {
   "name": "battle-cards",
-  "version": "3.0.0",
+  "version": "4.1.0",
   "private": true,
   "scripts": {
     "dev": "nuxt",
@@ -11,7 +11,7 @@
     "lint": "npm run lint:js",
     "test": "jest",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-    "release": "standard-version -- --release-as major",
+    "release": "standard-version",
     "commit": "git-cz"
   },
   "dependencies": {
@@ -30,10 +30,13 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "flag-icon-css": "^3.5.0",
+    "loadash": "^1.0.0",
     "mongoose": "^6.0.12",
+    "mongoose-autopopulate": "^0.16.0",
     "mongoose-keywords": "^0.4.0",
     "morgan": "^1.9.1",
     "nuxt": "^2.15.7",
+    "nuxt-socket-io": "^2.0.0",
     "passport": "^0.4.1",
     "passport-http": "^0.3.0",
     "passport-http-bearer": "^1.0.1",
@@ -42,6 +45,7 @@
     "sass": "^1.43.4",
     "sass-loader": "^10.1.1",
     "vue-chartist": "^2.3.1",
+    "vuedraggable": "^2.24.3",
     "vuetify": "^2.5.5",
     "vuetify-snackbars": "^1.0.12"
   },

@@ -137,7 +137,7 @@
 </template>
 <script>
 export default {
-  layout: 'auth',
+  layout: 'AuthLayout',
   data: () => ({
     dialog: true,
     tab: 0,
@@ -200,10 +200,11 @@ export default {
       if (this.$refs.registerForm.validate()) {
         const res = await this.$auth
           .registerWith('local', {
-            firstName: this.firstName,
-            lastName: this.lastName,
-            email: this.email,
-            password: this.password,
+            data: {
+              email: this.email,
+              password: this.password,
+              access_token: this.$config.masterKey,
+            },
           })
           .catch((err) => {
             console.log(err)

@@ -1,7 +1,7 @@
 import Vue from 'vue'
-import ChartCard from '@/components/material/ChartCard'
-import Notification from '@/components/material/Notification'
-import StatsCard from '@/components/material/StatsCard'
+import ChartCard from '@/components/app/material/ChartCard'
+import Notification from '@/components/app/material/Notification'
+import StatsCard from '@/components/app/material/StatsCard'
 
 Vue.component(ChartCard.name, ChartCard)
 Vue.component(Notification.name, Notification)

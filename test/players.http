@@ -12,3 +12,7 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:3000/api/players/6191e38b6ed390a889c26964
+
+
+###
+curl -X POST http://0.0.0.0:3000/api/users -i -d "email=519807003@qq.com&password=123456&access_token=m86byI6X4045jmQBsuqYM4mk7sSRVg5q"

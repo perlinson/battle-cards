@@ -30,13 +30,12 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '~/plugins/chartist.js',
-    '~/plugins/components.js',
     '~/plugins/axios',
     { src: '@/plugins/snakbar', mode: 'client' }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
+  components: ['~/components/app', '~/components/game'],
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
@@ -73,7 +72,9 @@ export default {
     '@nuxt/content',
 
     '@nuxtjs/auth-next',
-    '@nuxtjs/i18n'
+    '@nuxtjs/i18n',
+
+    'nuxt-socket-io'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -90,6 +91,12 @@ export default {
     scss: ['~/assets/vars/*.scss', '~/assets/abstracts/_mixin.scss']
   },
   auth: {
+    redirect: {
+      login: '/login',
+      logout: '/',
+      callback: '/login',
+      home: '/dashboard'
+    },
     strategies: {
       local: {
         token: {
@@ -126,7 +133,7 @@ export default {
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
-      dark: true,
+      dark: false,
       themes: {
         dark: {
           primary: colors.blue.darken2,
@@ -141,10 +148,26 @@ export default {
     }
   },
 
+  io: {
+    sockets: [
+      {
+        name: 'home',
+        default: true,
+        vuex: {
+          mutations: [{ progress: 'examples/SET_PROGRESS' }],
+          actions: [{ chatMessage: 'FORMAT_MESSAGE' }]
+        },
+        namespaces: {
+          '/index': {}
+        }
+      }
+    ]
+  },
+
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 
   serverMiddleware: {
-    '/api': '~/server-middleware/'
+    '/api': '~/server/'
   }
 }

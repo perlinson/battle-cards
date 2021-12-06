@@ -5,7 +5,7 @@
 <script>
 export default {
   created() {
-    this.$router.replace('/dashboard/')
+    this.$router.push('/dashboard/')
   },
 }
 </script>
