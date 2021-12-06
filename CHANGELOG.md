@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.1.0](///compare/v3.0.0...v4.1.0) (2021-12-06)
+
+
+### Features
+
+* 调试好了 socket   增加了 卡组侧边栏预览 卡牌的拖动 7ccb4d2
+* 增加了 nuxt-socket-io 模块  实现了 join 逻辑 b98df71
+* **plugins/animate.js:** 增加animate.css 动画库支持 46f7e37
+
+
+### Code Refactoring
+
+* 增加了 卡牌对战游戏的各个子组件手牌  墓地 卡组  除外区等等 99202b7
+
+
+### Others
+
+* **release:** 4.0.0 6e45270
+
 ## [4.0.0](https://gitee.com/XingXuanKeJiWenHua/battle-cards/compare/v2.2.1...v4.0.0) (2021-11-28)
 
 
