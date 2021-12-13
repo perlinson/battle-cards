@@ -34,7 +34,7 @@ export default {
   },
 
   publicRuntimeConfig: {
-    baseURL: 'https://nuxtjs.org',
+    baseURL: 'http://www.perlinson.xyz',
     masterKey: process.env.MASTER_KEY || 'masterkey'
   },
   privateRuntimeConfig: {},
@@ -93,7 +93,9 @@ export default {
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    baseURL: 'http://www.perlinson.xyz'
+  },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
