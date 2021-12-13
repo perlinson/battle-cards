@@ -23,10 +23,6 @@ jobs:
             - ~/.npm
 
       - run:
-          name: Run linter
-          command: npm run lint
-
-      - run:
           name: Run tests
           command: npm run test
       - run:
