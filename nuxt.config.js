@@ -7,14 +7,16 @@ const routerBase =
   process.env.DEPLOY_ENV === 'GH_PAGES'
     ? {
         router: {
-          base: '/battle-cards/',
-        },
+          base: '/battle-cards/'
+        }
       }
     : {}
 
 const { locale, availableLocales, fallbackLocale } = config.locales
 export default {
   ...routerBase,
+
+  target: process.env.NODE_ENV !== 'production' ? 'server' : 'static',
 
   dev: process.env.NODE_ENV !== 'production',
 
@@ -26,14 +28,14 @@ export default {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' },
+      { name: 'format-detection', content: 'telephone=no' }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
 
   publicRuntimeConfig: {
     baseURL: 'https://nuxtjs.org',
-    masterKey: process.env.MASTER_KEY || 'masterkey',
+    masterKey: process.env.MASTER_KEY || 'masterkey'
   },
   privateRuntimeConfig: {},
 
@@ -44,7 +46,7 @@ export default {
   plugins: [
     '~/plugins/chartist.js',
     '~/plugins/axios',
-    { src: '@/plugins/snakbar', mode: 'client' },
+    { src: '@/plugins/snakbar', mode: 'client' }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -57,22 +59,22 @@ export default {
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
 
-    '@nuxtjs/style-resources',
+    '@nuxtjs/style-resources'
   ],
 
   i18n: {
     detectBrowserLanguage: {
       useCookie: true,
       cookieKey: 'i18n_redirected',
-      redirectOn: 'root', // recommended
+      redirectOn: 'root' // recommended
     },
     locales: availableLocales,
     defaultLocale: locale,
     lazy: true,
     langDir: 'translations/',
     vueI18n: {
-      fallbackLocale,
-    },
+      fallbackLocale
+    }
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -87,7 +89,7 @@ export default {
     '@nuxtjs/auth-next',
     '@nuxtjs/i18n',
 
-    'nuxt-socket-io',
+    'nuxt-socket-io'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -96,19 +98,19 @@ export default {
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
-      lang: 'en',
-    },
+      lang: 'en'
+    }
   },
 
   styleResources: {
-    scss: ['~/assets/vars/*.scss', '~/assets/abstracts/_mixin.scss'],
+    scss: ['~/assets/vars/*.scss', '~/assets/abstracts/_mixin.scss']
   },
   auth: {
     redirect: {
       login: '/login',
       logout: '/',
       callback: '/login',
-      home: '/dashboard',
+      home: '/dashboard'
     },
     strategies: {
       local: {
@@ -117,26 +119,26 @@ export default {
           global: true,
           required: true,
           type: 'Bearer',
-          maxAge: 60 * 60 * 24 * 7,
+          maxAge: 60 * 60 * 24 * 7
         },
         user: {
-          autoFetch: true,
+          autoFetch: true
         },
         endpoints: {
           login: {
             url: '/api/auth',
-            method: 'post',
+            method: 'post'
           },
           //        refresh: { url: "/api/auth/refresh-token", method: "post" },
           logout: false, //  we don't have an endpoint for our logout in our API and we just remove the token from localstorage
-          user: { url: '/api/users/me', method: 'get' },
-        },
-      },
-    },
+          user: { url: '/api/users/me', method: 'get' }
+        }
+      }
+    }
   },
 
   router: {
-    middleware: ['auth'],
+    middleware: ['auth']
   },
 
   // Content module configuration: https://go.nuxtjs.dev/config-content
@@ -155,10 +157,10 @@ export default {
           info: colors.teal.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
-          success: colors.green.accent3,
-        },
-      },
-    },
+          success: colors.green.accent3
+        }
+      }
+    }
   },
 
   io: {
@@ -168,19 +170,19 @@ export default {
         default: true,
         vuex: {
           mutations: [{ progress: 'examples/SET_PROGRESS' }],
-          actions: [{ chatMessage: 'FORMAT_MESSAGE' }],
+          actions: [{ chatMessage: 'FORMAT_MESSAGE' }]
         },
         namespaces: {
-          '/index': {},
-        },
-      },
-    ],
+          '/index': {}
+        }
+      }
+    ]
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 
   serverMiddleware: {
-    '/api': '~/server/',
-  },
+    '/api': '~/server/'
+  }
 }

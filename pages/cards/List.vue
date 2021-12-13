@@ -159,8 +159,8 @@
 <script>
 export default {
   async asyncData({ $axios }) {
-    const cards = await $axios.get('/api/cards').then((res) => res.data)
-    return { cards }
+    // const cards = await $axios.get('/api/cards').then((res) => res.data)
+    // return { cards }
   },
   data() {
     return {
