@@ -34,7 +34,6 @@ export default {
   },
 
   publicRuntimeConfig: {
-    baseURL: 'http://www.perlinson.xyz',
     masterKey: process.env.MASTER_KEY || 'masterkey'
   },
   privateRuntimeConfig: {},
@@ -93,9 +92,7 @@ export default {
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {
-    baseURL: 'http://www.perlinson.xyz'
-  },
+  axios: {},
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
@@ -166,8 +163,12 @@ export default {
   },
 
   server: {
-    port: process.env.PORT || 3000,
-    host: process.env.HOST || '0.0.0.0'
+    port: 8000, // default: 3000
+    host:
+      process.env.HOST || process.env.NODE_ENV !== 'production'
+        ? 'localhost'
+        : '0.0.0.0', // default: localhost,
+    timing: false
   },
 
   io: {

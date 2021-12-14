@@ -9,16 +9,7 @@ import { env } from '../../config'
 export default (apiRoot, routes) => {
   const app = express()
 
-  const corsOptions = {
-    origin: [
-      'http://localhost:3000',
-      'http://www.perlinson.xyz',
-      'https://perlinson.github.io'
-    ],
-    default: 'https://perlinson.github.io'
-  }
-
-  app.use(cors(corsOptions))
+  app.use(cors())
 
   /* istanbul ignore next */
   if (env === 'production' || env === 'development') {
