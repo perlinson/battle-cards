@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[31],{641:function(t,e,n){"use strict";n.r(e);var c={},l=n(41),component=Object(l.a)(c,(function(){var t=this.$createElement,e=this._self._c||t;return e("div",{staticClass:"text-caption --white-text"},[e("Deck")],1)}),[],!1,null,null,null);e.default=component.exports}}]);
