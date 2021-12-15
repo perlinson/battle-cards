@@ -163,14 +163,7 @@ module.export = {
     }
   },
 
-  server: {
-    port: 8000, // default: 3000
-    host:
-      process.env.HOST || process.env.NODE_ENV !== 'production'
-        ? 'localhost'
-        : '0.0.0.0', // default: localhost,
-    timing: false
-  },
+
 
   io: {
     sockets: [
