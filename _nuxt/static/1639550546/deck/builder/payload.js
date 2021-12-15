@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/deck/builder", {data:[{}],fetch:{},mutations:[]});
