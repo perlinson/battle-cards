@@ -13,7 +13,7 @@ const routerBase =
     : {}
 
 const { locale, availableLocales, fallbackLocale } = config.locales
-export default {
+module.export = {
   ...routerBase,
 
   target: process.env.NODE_ENV !== 'production' ? 'server' : 'static',
@@ -137,6 +137,7 @@ export default {
   },
 
   router: {
+    base: '/battle-cards/',
     middleware: ['auth']
   },
 
