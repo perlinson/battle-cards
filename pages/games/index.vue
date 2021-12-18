@@ -108,19 +108,19 @@ export default {
     },
     onDrop(evt) {
       // Metod som körs när spelaren släpper kort på spelplanen. evt innehåller vilket kort och vilket index det släpps på
-      // console.log(evt);
-      // if (evt.to.getAttribute("id") == "played") {
-      //   console.log(evt.newIndex); //Index i listan man lägger kortet
-      //   console.log(evt.item.getAttribute("value")); //Hämtar det som är sparat i :value för  de släppta objektet. I vårat fall card.id.
-      //   var move = {
-      //     card: evt.item.getAttribute("value"),
-      //     index: evt.newIndex,
-      //   };
-      //   this.playerHand.splice(evt.oldIndex, 1); //Tar bort kortet från spelarens hand
-      //   console.log(move);
-      //   this.$emit("moved", move); //Bubblar upp att ett move har gjorts
-      // }
-      // this.dragging = false;
+      console.log(evt)
+      if (evt.to.getAttribute('id') === 'played') {
+        console.log(evt.newIndex) // Index i listan man lägger kortet
+        console.log(evt.item.getAttribute('value')) // Hämtar det som är sparat i :value för  de släppta objektet. I vårat fall card.id.
+        const move = {
+          card: evt.item.getAttribute('value'),
+          index: evt.newIndex,
+        }
+        this.playerHand.splice(evt.oldIndex, 1) // Tar bort kortet från spelarens hand
+        console.log(move)
+        this.$emit('moved', move) // Bubblar upp att ett move har gjorts
+      }
+      this.dragging = false
     },
     setPlayerTurn(turn) {
       this.playerTurn = turn
@@ -151,6 +151,7 @@ export default {
 }
 .board {
   display: grid;
+  width: 100%;
 }
 .card-holder {
   text-align: center;

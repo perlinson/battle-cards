@@ -1,7 +1,13 @@
 const uri = 'api/deck/'
 
 export const state = () => ({
-  decks: []
+  decks: [],
+  deck: {
+    name: '',
+    description: '',
+    cards: []
+  },
+  selectedCards: []
 })
 
 export const mutations = {
@@ -14,11 +20,18 @@ export const mutations = {
     }
   },
   DELETE_DECK: (state, deck) =>
-    (state.decks = state.decks.filter((t) => deck.id !== t.id))
+    (state.decks = state.decks.filter((t) => deck.id !== t.id)),
+  ADD_SELECTED_CARD: (state, card) => {
+    state.deck.cards.push(card)
+  },
+  DELECT_SELECT_CARD: (state, card) =>
+    (state.deck.cards = state.deck.cards.filter((t) => card.id !== t.id))
 }
 
 export const getters = {
-  allDecks: (state) => state.decks
+  allDecks: (state) => state.decks,
+  currDeck: (state) => state.deck,
+  selectedCards: (state) => state.selectedCards
 }
 
 export const actions = {
@@ -34,8 +47,15 @@ export const actions = {
     const response = await $axios.put(`${uri}${deck.id}`, deck)
     commit('UPDATE_DECK', response.data)
   },
+
   async removeDeck({ commit, $axios }, deck) {
     await $axios.delete(`${uri}${deck.id}`)
     commit('DELETE_DECK', deck)
+  },
+  addSelectedCard({ commit }, card) {
+    commit('ADD_SELECTED_CARD', card)
+  },
+  removeSelectCard({ commit }, card) {
+    commit('DELECT_SELECT_CARD', card)
   }
 }

@@ -8,67 +8,40 @@
     :min-height="card_size.h"
     transition="fade-transition"
   >
-    <v-menu
-      v-model="menu_model"
-      transition="slide-y-transition"
-      bottom
-      :close-on-content-click="true"
-      :open-on-click="false"
-      :open-on-hover="false"
-    >
-      <template #activator="{ on }">
+    <v-hover>
+      <transition name="zoomin">
         <v-card
           class="d-inline-block mx-1 yu-card"
           :width="card_size.w"
           :height="card_size.h"
-          @contextmenu.prevent="menu_model = true"
-          v-on="on"
-          @mouseover="getCardInfo"
+          transition="scale-transition"
+          @mouseenter="getCardInfo"
           @mouseleave="resetCardHover"
         >
           <v-img
             :src="card.card_images[0].image_url_small"
-            contain
+            contain-enter-active
             aspect-ratio="1"
             :width="card_size.w"
             :height="card_size.h"
+            @click="onClick"
           >
-            <template #placeholder>
-              <v-layout fill-height align-center justify-center ma-0>
-                <v-progress-circular
-                  indeterminate
-                  color="primary"
-                  size="25"
-                ></v-progress-circular>
-              </v-layout>
-            </template>
           </v-img>
         </v-card>
-      </template>
-      <v-card min-width="220">
-        <v-card-title>Move To</v-card-title>
-        <v-divider></v-divider>
-        <v-card-text class="px-0 pt-0">
-          <v-list class="px-0 py-0">
-            <template v-for="(item, i) in move_places">
-              <v-list-item :key="i" @click="moveCard(item.to)">
-                <v-list-item-content>
-                  <v-list-item-title v-text="item.text"></v-list-item-title>
-                  <v-list-item-subtitle></v-list-item-subtitle>
-                </v-list-item-content>
-              </v-list-item>
-            </template>
-          </v-list>
-        </v-card-text>
-      </v-card>
-    </v-menu>
+      </transition>
+    </v-hover>
   </v-lazy>
 </template>
 
 <script>
 import { mapMutations } from 'vuex'
 export default {
-  props: ['card'],
+  props: {
+    card: {
+      type: Object,
+      default: () => {},
+    },
+  },
   data: () => ({
     isActive: false,
     card_size: {
@@ -92,7 +65,7 @@ export default {
     ],
   }),
   methods: {
-    ...mapMutations('card',[
+    ...mapMutations('card', [
       'setCurrentCard',
       'setCurrentCard_doHover',
       'resetCurrentCard_doHover',
@@ -108,6 +81,9 @@ export default {
     resetCardHover() {
       const card = this.card
       this.resetCurrentCard_doHover(card)
+    },
+    onClick() {
+      this.$emit('click', this.card)
     },
     moveCard(to) {
       // let { id } = this.card,

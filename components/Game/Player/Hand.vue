@@ -1,124 +1,97 @@
 <template>
-  <draggable :list="hand" class="c-hand" group="field">
-    <v-row no-gutters>
-      <v-row no-gutters>
-        <v-col v-for="c in 10" :key="c" cols="1" offset="">
-          <v-img src="obelisk.png" class="grey lighten-2" />
-        </v-col>
-      </v-row>
-    </v-row>
-    <!-- <v-row no-gutters class="d-flex flex-nowrap">
-      <v-col
-        v-for="(item, i) in hand"
-        :key="i"
-        class="d-flex child-flex"
-        cols="4"
-      >
-        <v-img
-          :src="item.src"
-          :lazy-src="item.src"
-          aspect-ratio="1"
-          max-height="100px"
-          containe
-          class="grey lighten-2 inline-block"
-        >
-        </v-img>
-      </v-col>
-    </v-row>
-
-    <div
-      v-for="(item, i) in hand"
-      :key="i"
-      class="d-flex flex-row justify-center"
-    >
-      <v-col cols="2">
-        <v-img :src="item.src" max-height="200px" contain aspect-ratio="1.5" />
-      </v-col>
-    </div> -->
+  <draggable
+    id="player-hand"
+    class="card-holder"
+    :class="{ correct: correctMove, wrong: wrongMove }"
+    group="player"
+    :list="playerHand"
+    v-bind="dragOptions"
+    :empty-insert-threshold="100"
+    @start="dragging = true"
+    @end="onDrop"
+    @change="log"
+  >
+    <!-- Korten i spelarens hand. Drag and drop-funktionen är bara aktiv om det är spelarens tur. -->
+    <transition-group id="hand" type="transition" name="card-holder">
+      <li v-for="card in hand" :key="card.id" :value="card.id" class="card">
+        <card :card="card"></card>
+      </li>
+    </transition-group>
   </draggable>
 </template>
 
 <script>
+import draggable from 'vuedraggable'
 export default {
-  data() {
-    return {
-      hand: [
-        {
-          name: 'card-1',
-          src: 'obelisk.png',
-          status: '',
-          type: '',
-          active: false,
-          x: 0,
-          y: 0,
-        },
-        {
-          name: 'card-2',
-          src: 'obelisk.png',
-          status: '',
-          type: '',
-          active: false,
-          x: 0,
-          y: 0,
-        },
-        {
-          name: 'card-3',
-          src: 'obelisk.png',
-          status: '',
-          type: '',
-          active: false,
-          x: 0,
-          y: 0,
-        },
-        {
-          name: 'card-4',
-          src: 'obelisk.png',
-          status: '',
-          type: '',
-          active: false,
-          x: 0,
-          y: 0,
-        },
-        {
-          name: 'card-5',
-          src: 'obelisk.png',
-          status: '',
-          type: '',
-          active: false,
-          x: 0,
-          y: 0,
-        },
-        {
-          name: 'card-6',
-          src: 'obelisk.png',
-          status: '',
-          type: '',
-          active: false,
-          x: 0,
-          y: 0,
-        },
-        {
-          name: 'card-7',
-          src: 'obelisk.png',
-          status: '',
-          type: '',
-          active: false,
-          x: 0,
-          y: 0,
-        },
-        {
-          name: 'card-8',
-          src: 'obelisk.png',
-          status: '',
-          type: '',
-          active: false,
-          x: 0,
-          y: 0,
-        },
-      ],
-    }
+  components: {
+    draggable,
+  },
+  props: {
+    hand: {
+      type: Array,
+      default: () => [],
+      required: true,
+    },
+  },
+
+  computed: {
+    dragOptions() {
+      return {
+        animation: 300,
+        group: 'description',
+        disabled: false,
+        ghostClass: 'ghost',
+      }
+    },
+  },
+  methods: {
+    onDrop(e) {
+      console.log('onDrop', e.to)
+      this.dragging = false
+      this.$gsap.to(e.to, { duration: 1 })
+    },
+    log(e) {
+      console.log('log', e)
+    },
   },
 }
 </script>
 
-<style></style>
+<style>
+.card-holder {
+  text-align: center;
+  white-space: nowrap;
+  padding: 0em;
+}
+
+.correct {
+  animation-name: correctmove;
+  animation-duration: 1s;
+}
+@keyframes correctmove {
+  0% {
+    background-color: grey;
+  }
+  50% {
+    background-color: green;
+  }
+  100% {
+    background-color: grey;
+  }
+}
+.wrong {
+  animation-name: wrongmove;
+  animation-duration: 1s;
+}
+@keyframes wrongmove {
+  0% {
+    background-color: grey;
+  }
+  50% {
+    background-color: red;
+  }
+  100% {
+    background-color: grey;
+  }
+}
+</style>

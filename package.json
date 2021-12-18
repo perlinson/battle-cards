@@ -75,6 +75,7 @@
     "eslint-plugin-nuxt": "^2.0.0",
     "eslint-plugin-vue": "^7.12.1",
     "jest": "^27.0.5",
+    "nuxt-gsap-module": "^1.5.0",
     "prettier": "^2.3.2",
     "push-dir": "^0.4.1",
     "sass": "^1.43.4",
@@ -87,8 +88,7 @@
       "path": "cz-conventional-changelog"
     },
     "nuxt": {
-      "port": 8000,
-      "host": "0.0.0.0"
+      "port": 8000
     }
   }
 }

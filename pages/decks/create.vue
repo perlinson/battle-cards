@@ -1,41 +1,83 @@
 <template>
   <v-container>
-    <v-row>
-      <router-link to="/edit">
-        <v-btn @click="addDeck">Create New Deck</v-btn>
-      </router-link>
+    <v-row no-gutters>
+      <v-text-field
+        v-model="currDeck.name"
+        append-icon="mdi-microphone"
+        class="mx-1"
+        flat
+        hide-details
+        label="输入卡组名称"
+        solo-inverted
+      ></v-text-field>
     </v-row>
     <v-row>
-      <v-col cols="12" sm="6" md="4" lg="3" xl="2">
-        <v-card v-for="(deck, i) in alldecks" :key="i">
-          <v-card-title>
-            <v-card-title-text>
-              <span class="headline">{{ deck.name }}</span>
-            </v-card-title-text>
-          </v-card-title>
-          <v-card-text>
-            <!-- <v-list>
-              <v-list-item
-                v-for="(card, i) in deck.cards"
-                :key="i"
-              >
-                <v-list-item-content class="pl-4">
-                  {{ card.name }}
-                </v-list-item-content>
-              </v-list-item>
-            </v-list> -->
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" text @click="editDeck(deck)"
-              ><small>编辑</small></v-btn
-            >
-            <v-btn color="blue darken-1" text @click="deleteDeck(deck)"
-              ><small>删除</small></v-btn
-            >
-          </v-card-actions>
-        </v-card>
-      </v-col>
+      <v-card style="width: 100vw">
+        <v-toolbar flat prominent>
+          <v-text-field
+            append-icon="mdi-microphone"
+            class="mx-1"
+            flat
+            hide-details
+            label="查找卡牌"
+            prepend-inner-icon="mdi-magnify"
+            solo-inverted
+          ></v-text-field>
+
+          <template #extension>
+            <v-tabs v-model="tabs">
+              <v-tab> 基础卡组 </v-tab>
+              <v-tab> 种族限定卡组 </v-tab>
+              <v-tab> 职业限定卡组 </v-tab>
+            </v-tabs>
+          </template>
+        </v-toolbar>
+        <v-tabs-items v-model="tabs">
+          <v-tab-item>
+            <v-card flat>
+              <v-card-text>
+                <p>基础卡牌列表</p>
+              </v-card-text>
+            </v-card>
+          </v-tab-item>
+          <v-tab-item>
+            <v-card flat>
+              <v-card-title class="text-h5"> An awesome title </v-card-title>
+              <card-list
+                :cards="baseCards"
+                @chooseCard="addSelectedCard"
+              ></card-list>
+            </v-card>
+          </v-tab-item>
+          <v-tab-item>
+            <v-card flat>
+              <v-card-title class="text-h5">
+                An even better title
+              </v-card-title>
+              <v-card-text>
+                <p>职业限定列表</p>
+              </v-card-text>
+            </v-card>
+          </v-tab-item>
+        </v-tabs-items>
+      </v-card>
+    </v-row>
+    <v-row>
+      <v-card flat>
+        <v-card-title
+          >已选卡牌（{{ editedDeck.cards.length }} / 40）</v-card-title
+        >
+        <v-card-text>
+          <p>卡组列表</p>
+          <card-list
+            :cards="editedDeck.cards"
+            @chooseCard="removeSelectCard"
+          ></card-list>
+        </v-card-text>
+      </v-card>
+    </v-row>
+    <v-row>
+      <v-btn @click="addDeck">创建卡组</v-btn>
     </v-row>
   </v-container>
 </template>
@@ -83,10 +125,15 @@ export default {
         },
       ],
       infiniteId: +new Date(),
+      editedDeck: {
+        name: '',
+        description: '',
+        cards: [],
+      },
     }
   },
   computed: {
-    ...mapGetters('deck', ['selectedCards']),
+    ...mapGetters('deck', ['allDecks', 'selectedCards']),
   },
   watch: {
     query() {
@@ -109,7 +156,13 @@ export default {
     }
   },
   methods: {
-    ...mapActions('deck', ['fetchDecks', 'updateDeck', 'removeDeck']),
+    ...mapActions('deck', [
+      'fetchDecks',
+      'addDeck',
+      'updateCurrDeck',
+      'addSelectedCard',
+      'removeSelectCard',
+    ]),
     async infiniteHandler($state) {
       try {
         const findQueries = {
@@ -156,6 +209,9 @@ export default {
       this.$router.replace({
         query: { q: this.query, filter: this.filter.name },
       })
+    },
+    chooseCard(card) {
+      this.selectedCards.push(card)
     },
   },
 }
