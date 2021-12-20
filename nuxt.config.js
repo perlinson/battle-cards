@@ -53,6 +53,7 @@ export default {
   plugins: [
     '~/plugins/chartist.js',
     '~/plugins/axios',
+    '~/plugins/vuetify.js',
     { src: '@/plugins/snakbar', mode: 'client' }
   ],
 

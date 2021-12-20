@@ -53,7 +53,7 @@
           </v-card>
         </v-menu>
         <toolbar-language />
-        <v-btn :to="localePath('/user-profile')" icon>
+        <v-btn :to="localePath('/user/profile')" icon>
           <v-icon color="tertiary">mdi-account</v-icon>
         </v-btn>
       </v-row>

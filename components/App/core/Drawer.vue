@@ -95,12 +95,12 @@ export default {
         text: 'drawer.card',
       },
       {
-        to: '/users/profile',
+        to: '/user/profile',
         icon: 'mdi-account',
         text: 'drawer.profile',
       },
       {
-        to: '/users/deck',
+        to: '/user/deck',
         icon: 'mdi-account',
         text: 'drawer.deck',
       },
